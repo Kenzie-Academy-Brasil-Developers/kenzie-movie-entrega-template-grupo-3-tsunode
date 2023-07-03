@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import { api } from '../../services/api';
-import { AxiosError } from 'axios';
+/* import { AxiosError } from 'axios'; */
 
-interface IMovies {
+import { MoviesList } from '../../Components/MoviesList/MoviesList.tsx';
+
+export interface IMovies {
   id: number;
   name: string;
   type: string;
@@ -14,6 +16,8 @@ interface IMovies {
 
 export const HomePage = () => {
   const [moviesList, setMoviesList] = useState<IMovies[]>([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [currentMovie, setCurrentMovie] = useState<IMovies | null>(null);
 
   useEffect(() => {
     const renderMovies = async () => {
@@ -21,14 +25,46 @@ export const HomePage = () => {
         const response = await api.get<IMovies[]>('/movies');
         setMoviesList(response.data);
       } catch (error) {
-        const currentError = error as AxiosError<string>;
-        console.log(currentError.response.data);
+        /*  const currentError = error as AxiosError<string>; */
+        /* console.log(currentError.response.data); */
+        console.log(error);
       }
     };
     renderMovies();
   }, []);
 
-  return <div></div>;
+  return (
+    <div>
+      {openModal ? <p>Modal is Open</p> : null}
+      {currentMovie ? (
+        <div>
+          <button onClick={() => setCurrentMovie(null)}>Close Modal</button>
+          <img src={currentMovie.image} />
+          <p>{currentMovie.type}</p>
+          <h2>{currentMovie.name}</h2>
+          <p>{currentMovie.synopsis}</p>
+          <div>
+            <button> Rate movie</button>
+          </div>
+        </div>
+      ) : null}
+      <MoviesList moviesList={moviesList} setCurrentMovie={setCurrentMovie} />
+      {/* <ul>
+        {moviesList.map((movie, index) => {
+          return (
+            <li key={index}>
+              <h1>{movie.name}</h1>
+              <h2>{movie.type}</h2>
+              <h3>{movie.duration}</h3>
+              <h4>{movie.synopsis}</h4>
+              <img src={movie.image} />
+              <button onClick={() => setCurrentMovie(movie)}>Know more</button>
+            </li>
+          );
+        })}
+      </ul> */}
+    </div>
+  );
 };
 
 // Inicialização de testes para a Página Home do Kenzie Movies (sem ser necessário Login)

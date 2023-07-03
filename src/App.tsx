@@ -1,10 +1,10 @@
-import { useState } from 'react'
+/* import { HomePage } from './Pages/HomePage/HomePage'; */
 
-export const App =() => {
-  const [count, setCount] = useState(0)
-
+export const App = () => {
   return (
-    <p>ola</p>
-  )
-}
-
+    <div>
+      <p>ola</p>
+      {/* <HomePage /> */}
+    </div>
+  );
+};
