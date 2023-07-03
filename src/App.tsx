@@ -1,10 +1,14 @@
-import { useState } from 'react'
+import { GlobalVariables } from "./styles/Global";
+import { StyledInput } from "./styles/Inputs";
+import { GlobalReset } from "./styles/Reset";
 
-export const App =() => {
-  const [count, setCount] = useState(0)
+export const App = () => {
 
   return (
-    <p>ola</p>
-  )
-}
-
+    <>
+      <GlobalReset />
+      <GlobalVariables />
+      <StyledInput />
+    </>
+  );
+};
