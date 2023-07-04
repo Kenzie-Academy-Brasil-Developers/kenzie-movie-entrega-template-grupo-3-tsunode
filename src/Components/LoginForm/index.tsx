@@ -3,19 +3,9 @@ import { api } from "../../services/api";
 import { Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { LoginFormSchema } from "./LoginFormSchema";
 
 export const LoginForm = () => {
-    
-    const LoginFormSchema = z.object({
-    email: z.
-        string()
-        .nonempty("O email é obrigatório"),
-
-    password: z.
-        string()
-        .nonempty("A senha é obrigatória")
-
-})
     
     const { register, handleSubmit, formState: { errors }  } = useForm<FormData>({
         resolver: zodResolver(LoginFormSchema)
