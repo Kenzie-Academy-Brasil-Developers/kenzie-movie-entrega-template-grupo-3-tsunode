@@ -1,26 +1,40 @@
-import { IMovies } from "../../Pages/HomePage/HomePage";
-import React from "react";
-import { StyledItem, StyledUpperSection } from "./MoviesCardStyle";
-import { SmallYellowButton } from "../../styles/Buttons";
-import { Paragraph, Title2 } from "../../styles/typography";
+import { IMovies } from '../../Pages/HomePage/HomePage';
+import React, { useContext, useEffect, useState } from 'react';
+import { StyledItem, StyledUpperSection } from './MoviesCardStyle';
+import { SmallYellowButton } from '../../styles/Buttons';
+import { Paragraph, Title2 } from '../../styles/typography';
+import { useNavigate } from 'react-router-dom';
+import { MovieContext } from '../../providers/MovieContext';
+
 
 interface IMoviesCardProps {
   movie: IMovies;
-  setCurrentMovie: React.Dispatch<React.SetStateAction<IMovies | null>>;
+  
 }
 
-export const MoviesCard = ({ movie, setCurrentMovie }: IMoviesCardProps) => {
+export const MoviesCard = ({ movie }: IMoviesCardProps) => {
+  
+  const { setSelectMovie } = useContext(MovieContext) as {
+    setSelectMovie: (movie: IMovies | null) => void;
+  };
+
+
+  const navigate = useNavigate()
+
   return (
     <StyledItem>
-      <img id={movie.id.toString()} src={movie.image} />
+      <img onClick={() => {setSelectMovie(movie), navigate('/renderPage')}} src={movie.image} />
       <StyledUpperSection>
-        <SmallYellowButton buttonsize={10} onClick={() => setCurrentMovie(movie)}>{movie.type}</SmallYellowButton>
+        <SmallYellowButton buttonSize={10}>{movie.type}</SmallYellowButton>
         <Paragraph>{movie.duration}m</Paragraph>
       </StyledUpperSection>
       <StyledUpperSection>
         <Title2>{movie.name}</Title2>
-        <Paragraph>colocar o score</Paragraph>
+        <Paragraph>colocar o score</Paragraph> 
       </StyledUpperSection>
     </StyledItem>
   );
 };
+
+
+// Linha 31 --> fazer a lógica do score (reduce)
