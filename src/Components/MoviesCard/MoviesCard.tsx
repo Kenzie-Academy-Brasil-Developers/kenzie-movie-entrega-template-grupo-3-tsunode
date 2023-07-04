@@ -14,16 +14,13 @@ interface IMoviesCardProps {
 
 export const MoviesCard = ({ movie }: IMoviesCardProps) => {
   
-  const { setSelectMovie } = useContext(MovieContext) as {
-    setSelectMovie: (movie: IMovies | null) => void;
-  };
 
 
   const navigate = useNavigate()
 
   return (
     <StyledItem>
-      <img onClick={() => {setSelectMovie(movie), navigate('/renderPage')}} src={movie.image} />
+      <img onClick={() => {localStorage.setItem('@LOCALMOVIEID',JSON.stringify(movie.id)), navigate('/renderPage')}} src={movie.image} />
       <StyledUpperSection>
         <SmallYellowButton buttonSize={10}>{movie.type}</SmallYellowButton>
         <Paragraph>{movie.duration}m</Paragraph>
