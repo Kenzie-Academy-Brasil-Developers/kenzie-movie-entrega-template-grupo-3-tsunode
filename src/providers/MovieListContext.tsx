@@ -1,4 +1,4 @@
-/* import { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
 interface IMovies {
   id: number;
@@ -7,6 +7,14 @@ interface IMovies {
   duration: number;
   synopsis: string;
   image: string;
+  reviews: [
+    {
+      movieId: number;
+      userId: number;
+      score: number;
+      description: string;
+    }
+  ];
 }
 
 interface IMovieListProviderProps {
@@ -29,4 +37,4 @@ export const MovieListProvider = ({ children }: IMovieListProviderProps) => {
     </MovieListContext.Provider>
   );
 };
- */
+

@@ -2,6 +2,8 @@ import { IMovies } from '../../Pages/HomePage/HomePage';
 
 import { MoviesCard } from '../MoviesCard/MoviesCard';
 import { StyledList, StyledListSection } from './MoviesList';
+import { useState } from 'react';
+
 
 interface IMoviesProps {
   moviesList: IMovies[];
@@ -9,12 +11,15 @@ interface IMoviesProps {
 }
 
 export const MoviesList = ({ moviesList, setCurrentMovie }: IMoviesProps) => {
+  const [selectMovie, setSelectMovie] = useState([]) // colocar ele no Context 
+  console.log(selectMovie)
   return (
     <StyledListSection>
-      {moviesList.map((movie) => {
+      {moviesList.map((movie ) => {
         return (
-          <StyledList>
-            <MoviesCard
+          <StyledList onClick={() => setSelectMovie(movie)}>
+          
+            <MoviesCard 
               key={movie.id}
               movie={movie}
               setCurrentMovie={setCurrentMovie}
@@ -25,3 +30,4 @@ export const MoviesList = ({ moviesList, setCurrentMovie }: IMoviesProps) => {
     </StyledListSection>
   );
 };
+
