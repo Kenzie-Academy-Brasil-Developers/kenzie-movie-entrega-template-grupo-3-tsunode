@@ -6,7 +6,7 @@ export const GlobalReset = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
     }
-    ol, ul{
+    ol, ul, li{
         list-style: none;
     }
     button{
