@@ -22,15 +22,17 @@ export const Register = () => {
       <div>
         <h1>Cadastro</h1>
         <button>
-          {" "}
           <img src={arrow} alt="" /> Voltar
         </button>
       </div>
       <p>Preencha os campos para cadastrar-se</p>
-      <Input placeholder="Nome" {...register("name")} />
-      <Input placeholder="E-mail" {...register("email")} />
-      <Input placeholder="Senha" {...register("password")} />
-      <Input placeholder="Confirmar Senha" {...register("confirmPassword")} />
+      <Input placeholder="Nome" register={register("name")} />
+      <Input placeholder="E-mail" register={register("email")} />
+      <Input placeholder="Senha" register={register("password")} />
+      <Input
+        placeholder="Confirmar Senha"
+        register={register("confirmPassword")}
+      />
       <Button title="Cadastre-se" />
     </form>
   );
