@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { LoginFormSchema } from "./LoginFormSchema";
-import { StyledInput } from "../../styles/Inputs";
 import { Input } from "../Input/Input";
 
 export const LoginForm = () => {

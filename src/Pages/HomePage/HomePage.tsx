@@ -35,7 +35,7 @@ export const HomePage = () => {
 
   return (
     <div>
-      <a href="/homePage">homePage</a>
+      <a href="/">homePage</a>
       <a href="/loginPage">loginPage</a>
       <a href="/registerPage">registerPage</a>
       {openModal ? <p>Modal is Open</p> : null}
