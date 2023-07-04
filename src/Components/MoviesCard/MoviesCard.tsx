@@ -1,21 +1,31 @@
 import { IMovies } from '../../Pages/HomePage/HomePage';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyledItem, StyledUpperSection } from './MoviesCardStyle';
 import { SmallYellowButton } from '../../styles/Buttons';
 import { Paragraph, Title2 } from '../../styles/typography';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { MovieContext } from '../../providers/MovieContext';
+
 
 interface IMoviesCardProps {
   movie: IMovies;
-  setCurrentMovie: React.Dispatch<React.SetStateAction<IMovies | null>>;
+  
 }
 
-export const MoviesCard = ({ movie, setCurrentMovie }: IMoviesCardProps) => {
+export const MoviesCard = ({ movie }: IMoviesCardProps) => {
+  
+  const { setSelectMovie } = useContext(MovieContext) as {
+    setSelectMovie: (movie: IMovies | null) => void;
+  };
+
+
+  const navigate = useNavigate()
+
   return (
     <StyledItem>
-      <img src={movie.image} />
+      <img onClick={() => {setSelectMovie(movie), navigate('/renderPage')}} src={movie.image} />
       <StyledUpperSection>
-        <SmallYellowButton buttonSize={10} onClick={() => setCurrentMovie(movie)}>{movie.type}</SmallYellowButton>
+        <SmallYellowButton buttonSize={10}>{movie.type}</SmallYellowButton>
         <Paragraph>{movie.duration}m</Paragraph>
       </StyledUpperSection>
       <StyledUpperSection>

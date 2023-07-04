@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 
 import { MoviesList } from '../../Components/MoviesList/MoviesList.tsx';
-import { useNavigate } from 'react-router-dom';
 
 
 
@@ -25,9 +24,8 @@ export interface IMovies {
 }
 
 export const HomePage = () => {
-  const [openModal, setOpenModal] = useState(false);
   const [moviesList, setMoviesList] = useState<IMovies[]>([]);
-  const [currentMovie, setCurrentMovie] = useState<IMovies | null>(null);
+  
 
   
 
@@ -36,7 +34,6 @@ export const HomePage = () => {
       try {
         const { data } = await api.get<IMovies[]>('/movies?_embed=reviews');
         setMoviesList(data);
-        console.log(data)
         localStorage.setItem('MOVIEID', JSON.stringify(data));
       } catch (error) {
         console.log(error);
@@ -63,7 +60,7 @@ export const HomePage = () => {
           </div>
         </div>
       ) : null} */}
-      <MoviesList moviesList={moviesList} setCurrentMovie={setCurrentMovie} />
+      <MoviesList moviesList={moviesList} />
     </div>
   );
 };

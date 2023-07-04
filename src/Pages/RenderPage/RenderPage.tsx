@@ -1,43 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { api } from '../../services/api';
 
 import { IMovies } from '../../Pages/HomePage/HomePage';
+import { MovieContext } from '../../providers/MovieContext';
 
 export const RenderPage = () => {
-  const [movieReview, setMovieReview] = useState<IMovies[]>([]);
+  
+  const { selectMovie } = useContext(MovieContext) as {
+    selectMovie: (movie: IMovies | null) => void;
+  };
 
- /*  useEffect(() => {
-    const id = localStorage.getItem("MOVIEID")
-    const renderMovieReview = async () => {
-      try {
-        const { data } = await api.get<IMovies[]>(`/movies/${id}`);
-        setMovieReview(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    renderMovieReview();
-  }, []) */;
+  console.log(selectMovie)
 
   return (
-    <div>
-      <h1>RenderPage</h1>
-      <p>here we will see the specific movie rendered!</p>
-
-      <div>
-        <li>
-          {movieReview.map((movie, index) => {
-            return (
-              <div key={index}>
-                <li>{movie.name}</li>
-                <p>here we will see the specific movie rendered!</p>
-              </div>
-            );
-          })}
-        </li>
-      </div>
-    </div>
+    <div>ola</div>
   );
 };
 
