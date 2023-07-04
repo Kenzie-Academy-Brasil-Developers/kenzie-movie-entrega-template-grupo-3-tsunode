@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 
 import { MoviesList } from '../../Components/MoviesList/MoviesList.tsx';
+import { useNavigate } from 'react-router-dom';
+
+
 
 export interface IMovies {
   id: number;
@@ -25,6 +28,8 @@ export const HomePage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [moviesList, setMoviesList] = useState<IMovies[]>([]);
   const [currentMovie, setCurrentMovie] = useState<IMovies | null>(null);
+
+  
 
   useEffect(() => {
     const renderMovies = async () => {

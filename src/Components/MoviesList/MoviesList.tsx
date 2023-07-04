@@ -4,20 +4,30 @@ import { MoviesCard } from '../MoviesCard/MoviesCard';
 import { StyledList, StyledListSection } from './MoviesList';
 import { useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 
 interface IMoviesProps {
   moviesList: IMovies[];
   setCurrentMovie: React.Dispatch<React.SetStateAction<IMovies | null>>;
 }
-
 export const MoviesList = ({ moviesList, setCurrentMovie }: IMoviesProps) => {
-  const [selectMovie, setSelectMovie] = useState([]) // colocar ele no Context 
+  const navigate = useNavigate()
+
+
+  const handleNewPage = (movie) => {
+    setSelectMovie(movie)
+    navigate('/renderPage')
+    console.log(selectMovie)
+  }
+  const [selectMovie, setSelectMovie] = useState(null) // colocar ele no Context 
+
   console.log(selectMovie)
   return (
     <StyledListSection>
       {moviesList.map((movie ) => {
         return (
-          <StyledList onClick={() => setSelectMovie(movie)}>
+          <StyledList onClick={() => handleNewPage(movie)}>
           
             <MoviesCard 
               key={movie.id}
