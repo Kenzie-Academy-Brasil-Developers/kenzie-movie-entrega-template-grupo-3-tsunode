@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { LoginFormSchema } from "./LoginFormSchema";
+import { StyledInput } from "../../styles/Inputs";
 
 export const LoginForm = () => {
     
@@ -37,9 +38,9 @@ export const LoginForm = () => {
     return(
         <form onSubmit={handleSubmit(submit)}>
                 <h1>Login</h1>
-                <input type="email" placeholder="E-mail" {...register('email')} />
+                <StyledInput type="email" placeholder="E-mail" {...register('email')} />
                 {<p>{errors.email?.message}</p>}
-                <input type="text" placeholder="senha" {...register('password')} />
+                <StyledInput type="text" placeholder="senha" {...register('password')} />
                 {<p>{errors.password?.message}</p>}
                 <button>Entrar</button>
                 <p>ou</p>
