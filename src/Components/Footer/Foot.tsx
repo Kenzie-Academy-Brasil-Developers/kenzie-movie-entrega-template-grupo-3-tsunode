@@ -1,18 +1,12 @@
+import { Title1MobileB } from "../../styles/typography";
+import { StyledFootDiv, StyledFooter } from "./FootStyle";
 
-
-export const Footer = ()=>{
-
-    return(
-        <div>
-            <div>
-                {/* Linha do footer onde não terá conteúdo */}
-            </div>
-            <div>
-                <p>
-                    Todos os direitos reservados - Kenzie Academy Brasil
-                </p>
-            </div>
-
-        </div>
-    )
-}
+export const Footer = () => {
+  return (
+    <StyledFooter>
+      <StyledFootDiv>
+        <Title1MobileB>Todos os direitos reservados - Kenzie Academy Brasil</Title1MobileB>
+      </StyledFootDiv>
+    </StyledFooter>
+  );
+};

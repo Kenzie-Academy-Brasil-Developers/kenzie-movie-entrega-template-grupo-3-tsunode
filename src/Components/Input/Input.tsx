@@ -7,5 +7,5 @@ interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = ({ register, ...rest }: IInputProps) => {
-  return <StyledInput {...register} {...rest} />;
+  return <StyledInput inputheight={3} inputwidth={21} {...register} {...rest} />;
 };

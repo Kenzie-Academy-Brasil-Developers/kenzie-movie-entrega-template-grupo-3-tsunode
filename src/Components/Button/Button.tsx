@@ -1,3 +1,4 @@
+import { MediumYellowButton } from "../../styles/Buttons";
 
 
 interface ButtonProps{
@@ -6,8 +7,8 @@ interface ButtonProps{
 
 export const Button = ({title}:ButtonProps) =>{
     return(
-        <button>
+        <MediumYellowButton buttonsize={13}>
             {title}
-        </button>
+        </MediumYellowButton>
     )
 }

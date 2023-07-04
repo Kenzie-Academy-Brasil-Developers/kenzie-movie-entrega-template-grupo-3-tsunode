@@ -30,3 +30,15 @@ export const Paragraph = styled.p`
   font-family: var(--ff);
   font-weight: 200;
 `;
+export const RegisterLink = styled.p`
+  color: var(--yellow);
+  font-size: 1.0625rem;
+  font-family: var(--ff);
+  text-decoration: underline;
+  font-weight: 600;
+  transition: 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    color: gold;
+  }
+`;

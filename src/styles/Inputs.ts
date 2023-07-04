@@ -1,7 +1,14 @@
 import { styled } from "styled-components";
 
-export const StyledInput = styled.input`
-    height: 2.375rem;
+interface Iinput {
+    inputheight: number | undefined
+    inputwidth: number | undefined
+
+}
+
+export const StyledInput = styled.input<Iinput>`
+    width: ${({inputwidth}) => inputwidth}rem;
+    height: ${({inputheight}) => inputheight}rem;
     outline: none;
     border: none;
     background-color: var(--lightgray1);
