@@ -1,11 +1,28 @@
-import { Footer } from "../../Components/Footer/Foot";
-import { LoginForm } from "../../Components/LoginForm";
+import { useForm } from "react-hook-form";
+import { api } from "../../services/api";
+import { Link } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-export const LoginPage = () => {
+export const LoginForm = () => {
     
-    const { register, handleSubmit } = useForm<FormData>()
+    const LoginFormSchema = z.object({
+    email: z.
+        string()
+        .nonempty("O email é obrigatório"),
 
-    interface FormData {
+    password: z.
+        string()
+        .nonempty("A senha é obrigatória")
+
+})
+    
+    const { register, handleSubmit, formState: { errors }  } = useForm<FormData>({
+        resolver: zodResolver(LoginFormSchema)
+    })
+
+
+    interface FormData extends z.infer<typeof LoginFormSchema> {
         email: string;
         password: string;
     }
@@ -20,6 +37,7 @@ export const LoginPage = () => {
             const { data } = await api.post('/login', formData)
             localStorage.setItem('@TOKEN', JSON.stringify(data.accessToken))
             localStorage.setItem('@USERID', JSON.stringify(data.user.id))
+            localStorage.setItem('@USERNAME', JSON.stringify(data.user.name))
         } catch (error) {
             console.log('233')
 
@@ -27,23 +45,15 @@ export const LoginPage = () => {
     } 
     
     return(
-        <>
-        
-            <a href="/homePage">homePage</a>
-            <a href="/loginPage">loginPage</a>
-            <a href="/registerPage">registerPage</a>
-            <header></header>
-            <form onSubmit={handleSubmit(submit)}>
+        <form onSubmit={handleSubmit(submit)}>
                 <h1>Login</h1>
                 <input type="email" placeholder="E-mail" {...register('email')} />
+                {<p>{errors.email?.message}</p>}
                 <input type="text" placeholder="senha" {...register('password')} />
+                {<p>{errors.password?.message}</p>}
                 <button>Entrar</button>
                 <p>ou</p>
                 <Link to={'/registerPage'}>Cadastre-se</Link>
             </form>
-            <Footer/>
-        
-        
-        </>
     )
 }
