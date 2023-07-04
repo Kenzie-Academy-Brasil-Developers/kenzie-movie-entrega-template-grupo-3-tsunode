@@ -26,6 +26,7 @@ export const RenderPage = () => {
         }
     }
     loadMovie()
+    setSelectMovie(null)
 }, [])
 
   console.log(selectMovie)
@@ -44,8 +45,8 @@ export const RenderPage = () => {
       </StyledUpperSection>
       <Paragraph>{selectMovie.synopsis}</Paragraph></div>}
     
-    
       
+    
       
     </>
   );
