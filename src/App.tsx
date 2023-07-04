@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { RoutesMain } from './routes/RoutesMainTest';
 
 export const App = () => {
-  const [count, setCount] = useState(0);
 
-  return <p>ola</p>;
+  return(
+    <RoutesMain/>
+  )
 };
