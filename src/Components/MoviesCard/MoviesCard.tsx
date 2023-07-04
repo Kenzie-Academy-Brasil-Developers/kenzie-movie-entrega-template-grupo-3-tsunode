@@ -13,17 +13,9 @@ interface IMoviesCardProps {
 export const MoviesCard = ({ movie, setCurrentMovie }: IMoviesCardProps) => {
   return (
     <StyledItem>
-      <Link to="/renderPage">
-        <img src={movie.image} />
-      </Link>
-
+      <img src={movie.image} />
       <StyledUpperSection>
-        <SmallYellowButton
-          buttonSize={10}
-          onClick={() => setCurrentMovie(movie)}
-        >
-          {movie.type}
-        </SmallYellowButton>
+        <SmallYellowButton buttonSize={10} onClick={() => setCurrentMovie(movie)}>{movie.type}</SmallYellowButton>
         <Paragraph>{movie.duration}m</Paragraph>
       </StyledUpperSection>
       <StyledUpperSection>

@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
 
 interface IButtonSize {
-  buttonSize: number | undefined;
+  buttonsize: number | undefined;
 }
 
 export const SmallYellowButton = styled.button<IButtonSize>`
-  width: ${({ buttonSize }) => buttonSize}rem;
+  width: ${({ buttonsize }) => buttonsize}rem;
   height: 2.6875rem;
   border-radius: 15.9375rem;
   background-color: var(--yellow);
@@ -21,7 +21,7 @@ export const SmallYellowButton = styled.button<IButtonSize>`
   }
 `;
 export const MediumYellowButton = styled.button<IButtonSize>`
-  width: ${({ buttonSize }) => buttonSize}rem;
+  width: ${({ buttonsize }) => buttonsize}rem;
   height: 3.6875rem;
   border-radius: 15.9375rem;
   background-color: var(--yellow);
@@ -37,7 +37,7 @@ export const MediumYellowButton = styled.button<IButtonSize>`
   }
 `;
 export const BigYellowButton = styled.button<IButtonSize>`
-  width: ${({ buttonSize }) => buttonSize}rem;
+  width: ${({ buttonsize }) => buttonsize}rem;
   height: 4.6875rem;
   border-radius: 15.9375rem;
   background-color: var(--yellow);
