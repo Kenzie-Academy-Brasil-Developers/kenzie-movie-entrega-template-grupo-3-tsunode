@@ -1,6 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalReset = createGlobalStyle`
+    body{
+        background-color: var(--lightgray2);
+    }
     *{
         margin: 0;
         padding: 0;

@@ -1,4 +1,8 @@
-import { IMovies } from '../../Pages/HomePage/HomePage';
+import { IMovies } from "../../Pages/HomePage/HomePage";
+import React from "react";
+import { StyledItem, StyledUpperSection } from "./MoviesCardStyle";
+import { SmallYellowButton } from "../../styles/Buttons";
+import { Paragraph, Title2 } from "../../styles/typography";
 
 interface IMoviesCardProps {
   movie: IMovies;
@@ -7,13 +11,16 @@ interface IMoviesCardProps {
 
 export const MoviesCard = ({ movie, setCurrentMovie }: IMoviesCardProps) => {
   return (
-    <li>
-      <h2>{movie.name}</h2>
-      <h2>{movie.type}</h2>
-      <h2>{movie.duration}</h2>
-      <h2>{movie.synopsis}</h2>
+    <StyledItem>
       <img src={movie.image} />
-      <button onClick={() => setCurrentMovie(movie)}>Know more</button>
-    </li>
+      <StyledUpperSection>
+        <SmallYellowButton buttonSize={10} onClick={() => setCurrentMovie(movie)}>{movie.type}</SmallYellowButton>
+        <Paragraph>{movie.duration}m</Paragraph>
+      </StyledUpperSection>
+      <StyledUpperSection>
+        <Title2>{movie.name}</Title2>
+        <Paragraph>colocar o score</Paragraph>
+      </StyledUpperSection>
+    </StyledItem>
   );
 };

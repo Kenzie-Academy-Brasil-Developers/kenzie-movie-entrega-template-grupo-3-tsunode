@@ -26,7 +26,7 @@ export const Title2 = styled.h3`
 `;
 export const Paragraph = styled.p`
   color: var(--white);
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-family: var(--ff);
-  font-weight: 400;
+  font-weight: 200;
 `;

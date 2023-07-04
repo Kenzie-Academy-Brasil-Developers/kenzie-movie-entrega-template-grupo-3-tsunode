@@ -1,6 +1,7 @@
 import { IMovies } from '../../Pages/HomePage/HomePage';
 
 import { MoviesCard } from '../MoviesCard/MoviesCard';
+import { StyledList, StyledListSection } from './MoviesList';
 
 interface IMoviesProps {
   moviesList: IMovies[];
@@ -9,18 +10,18 @@ interface IMoviesProps {
 
 export const MoviesList = ({ moviesList, setCurrentMovie }: IMoviesProps) => {
   return (
-    <div>
+    <StyledListSection>
       {moviesList.map((movie) => {
         return (
-          <ul>
+          <StyledList>
             <MoviesCard
               key={movie.id}
               movie={movie}
               setCurrentMovie={setCurrentMovie}
             />
-          </ul>
+          </StyledList>
         );
       })}
-    </div>
+    </StyledListSection>
   );
 };

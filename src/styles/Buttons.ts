@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 interface IButtonSize {
-  buttonSize: number;
+  buttonSize: number | undefined;
 }
 
 export const SmallYellowButton = styled.button<IButtonSize>`
@@ -11,7 +11,6 @@ export const SmallYellowButton = styled.button<IButtonSize>`
   background-color: var(--yellow);
   font-family: var(--ff);
   font-weight: 600;
-  color: var(--white);
   transition: 0.2s ease;
   &:hover {
     background-color: gold;
@@ -28,7 +27,6 @@ export const MediumYellowButton = styled.button<IButtonSize>`
   background-color: var(--yellow);
   font-family: var(--ff);
   font-weight: 600;
-  color: var(--white);
   transition: 0.2s ease;
   &:hover {
     background-color: gold;
@@ -45,7 +43,6 @@ export const BigYellowButton = styled.button<IButtonSize>`
   background-color: var(--yellow);
   font-family: var(--ff);
   font-weight: 600;
-  color: var(--white);
   transition: 0.2s ease;
   &:hover {
     background-color: gold;
