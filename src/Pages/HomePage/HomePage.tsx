@@ -26,9 +26,6 @@ export interface IMovies {
 export const HomePage = () => {
   const [moviesList, setMoviesList] = useState<IMovies[]>([]);
   
-
-  
-
   useEffect(() => {
     const renderMovies = async () => {
       try {
@@ -41,6 +38,8 @@ export const HomePage = () => {
     };
     renderMovies();
   }, []);
+
+  
 
   return (
     <div>
