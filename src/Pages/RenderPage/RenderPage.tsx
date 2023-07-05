@@ -6,6 +6,7 @@ import { SmallYellowButton } from '../../styles/Buttons';
 import { Paragraph, Title2 } from '../../styles/typography';
 import { api } from '../../services/api';
 import { Header } from '../../Components/Header/Header';
+import { Footer } from '../../Components/Footer/Foot';
 
 export const RenderPage = () => {
   const { setSelectMovie, selectMovie } = useContext(MovieContext) as {
@@ -86,6 +87,7 @@ export const RenderPage = () => {
             )
            )}
           </div>
+          <Footer/>
         </div>
         
       }

@@ -4,6 +4,7 @@ import { api } from '../../services/api';
 
 import { MoviesList } from '../../Components/MoviesList/MoviesList.tsx';
 import { Header } from '../../Components/Header/Header.tsx';
+import { Footer } from '../../Components/Footer/Foot.tsx';
 
 
 
@@ -50,6 +51,7 @@ export const HomePage = () => {
       <a href="/registerPage">registerPage</a>
       <Header/>
       <MoviesList moviesList={moviesList} />
+      <Footer/>
     </div>
   );
 };
