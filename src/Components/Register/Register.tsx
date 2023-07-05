@@ -55,11 +55,20 @@ export const Register = (): JSX.Element => {
         </StyledTitleSection>
         <Paragraph>Preencha os campos para cadastrar-se</Paragraph>
         <StyledInputArea>
-          <Input placeholder="Nome" register={register("name")} />
-          <Input placeholder="E-mail" register={register("email")} />
-          <Input placeholder="Senha" register={register("password")} />
+          <Input placeholder="Nome" type="text" register={register("name")} />
+          <Input
+            placeholder="E-mail"
+            type="email"
+            register={register("email")}
+          />
+          <Input
+            placeholder="Senha"
+            type="password"
+            register={register("password")}
+          />
           <Input
             placeholder="Confirmar Senha"
+            type="password"
             register={register("confirmPassword")}
           />
         </StyledInputArea>
