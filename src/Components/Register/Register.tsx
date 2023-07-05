@@ -10,6 +10,8 @@ import {
   StyledTitleSection,
 } from "./RegisterStyle";
 import { Paragraph, RegisterLink, Title1 } from "../../styles/typography";
+import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 interface IRegisterUser {
   name: string;
@@ -18,11 +20,28 @@ interface IRegisterUser {
   confirmPassword: string;
 }
 
-export const Register = () => {
+export const Register = (): JSX.Element => {
   const { register, handleSubmit } = useForm<IRegisterUser>();
 
-  const onSubmit: SubmitHandler<IRegisterUser> = (data) => {
-    console.log(data);
+  const createUser = async (formData: IRegisterUser) => {
+    console.log(formData);
+    try {
+      const { data } = await api.post("/users", {
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
+      });
+      console.log("Sucesso");
+      toast.success("Usuário cadastrado com sucesso");
+    } catch (error) {
+      console.log(error);
+      toast.error("Erro ao cadastrar usuário");
+    }
+  };
+
+  const onSubmit: SubmitHandler<IRegisterUser> = (formData) => {
+    console.log(formData);
+    createUser(formData);
   };
 
   return (
