@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 
 import { MoviesList } from '../../Components/MoviesList/MoviesList.tsx';
+import { Header } from '../../Components/Header/Header.tsx';
 
 
 
@@ -42,23 +43,12 @@ export const HomePage = () => {
   
 
   return (
+    
     <div>
       <a href="/">homePage</a>
       <a href="/loginPage">loginPage</a>
       <a href="/registerPage">registerPage</a>
-     {/*  {openModal ? <p>Modal is Open</p> : null}
-      {currentMovie ? (
-        <div>
-          <button onClick={() => setCurrentMovie(null)}>Close Modal</button>
-          <img src={currentMovie.image} />
-          <p>{currentMovie.type}</p>
-          <h2>{currentMovie.name}</h2>
-          <p>{currentMovie.synopsis}</p>
-          <div>
-            <button> Rate movie</button>
-          </div>
-        </div>
-      ) : null} */}
+      <Header/>
       <MoviesList moviesList={moviesList} />
     </div>
   );

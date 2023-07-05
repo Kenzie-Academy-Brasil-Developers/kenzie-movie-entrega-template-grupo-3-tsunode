@@ -5,12 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { LoginFormSchema } from "./LoginFormSchema";
 import { Input } from "../Input/Input";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
     
     const { register, handleSubmit, formState: { errors }  } = useForm<FormData>({
         resolver: zodResolver(LoginFormSchema)
     })
+
+    const navigate = useNavigate()
+    
 
 
     interface FormData extends z.infer<typeof LoginFormSchema> {
@@ -29,6 +33,7 @@ export const LoginForm = () => {
             localStorage.setItem('@TOKEN', JSON.stringify(data.accessToken))
             localStorage.setItem('@USERID', JSON.stringify(data.user.id))
             localStorage.setItem('@USERNAME', JSON.stringify(data.user.name))
+            navigate('/')
         } catch (error) {
             console.log('233')
 

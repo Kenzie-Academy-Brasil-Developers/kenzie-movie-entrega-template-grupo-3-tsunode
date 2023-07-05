@@ -5,6 +5,7 @@ import { StyledUpperSection } from '../../Components/MoviesCard/MoviesCardStyle'
 import { SmallYellowButton } from '../../styles/Buttons';
 import { Paragraph, Title2 } from '../../styles/typography';
 import { api } from '../../services/api';
+import { Header } from '../../Components/Header/Header';
 
 export const RenderPage = () => {
   const { setSelectMovie, selectMovie } = useContext(MovieContext) as {
@@ -57,6 +58,7 @@ export const RenderPage = () => {
         <div>loading</div>
       ) : 
         <div>
+          <Header/>
           <img src={selectMovie.image} />
           <StyledUpperSection>
             <SmallYellowButton buttonSize={10}>
