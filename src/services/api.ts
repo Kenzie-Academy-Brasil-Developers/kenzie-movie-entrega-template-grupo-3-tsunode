@@ -2,5 +2,5 @@ import axios from 'axios';
 
 export const api = axios.create({
   baseURL: 'https://kenzie-movie-api.onrender.com/',
-  timeout: 2000,
+  timeout: 5000,
 });

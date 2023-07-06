@@ -76,12 +76,11 @@ export const RenderPage = () => {
             <Title2>{selectMovie.name}</Title2>
             <div>
               {averageScore !== null ? (
-                <p> Avg Score {averageScore}</p>
+                <Paragraph> Avg Score {averageScore}</Paragraph>
               ) : (
-                <p>loading...</p>
+                <Paragraph>loading...</Paragraph>
               )}
             </div>
-            <Paragraph>colocar o score</Paragraph>
           </StyledUpperSection>
           <Paragraph>{selectMovie.synopsis}</Paragraph>
           <div>
@@ -90,10 +89,10 @@ export const RenderPage = () => {
             </div>
             {selectMovie.reviews.map((review, index) => (
               <div key={index}>
-                <Paragraph>Filme{review.movieId}</Paragraph>
-                <Paragraph>Usuário{review.userId}</Paragraph>
-                <Paragraph>Comentário{review.description}</Paragraph>
-                <Paragraph>Nota{review.score}</Paragraph>
+                <Paragraph>Filme {review.movieId}</Paragraph>
+                <Paragraph>Usuário {review.userId}</Paragraph>
+                <Paragraph>Comentário {review.description}</Paragraph>
+                <Paragraph>Nota {review.score}</Paragraph>
               </div>
             ))}
           </div>
