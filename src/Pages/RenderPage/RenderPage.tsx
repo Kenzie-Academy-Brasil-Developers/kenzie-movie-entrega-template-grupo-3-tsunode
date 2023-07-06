@@ -10,15 +10,18 @@ import { Footer } from '../../Components/Footer/Foot';
 import { Modal } from '../../Components/Modal/Modal';
 import { ModalAtt } from '../../Components/ModalAtt/Modal';
 import { ReviewsCard } from '../../Components/ReviewsCard/ReviewsCard';
+import { SectionUser } from '../../Components/SectionUser/SectionUser';
 
 export const RenderPage = () => {
-  const [isOpen , setIsOpen] = useState(false)
-  const [isOpenAtt , setIsOpenAtt] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenAtt, setIsOpenAtt] = useState(false);
   const [averageScore, setAverageScore] = useState(null);
   const { setSelectMovie, selectMovie } = useContext(MovieContext) as {
     setSelectMovie: (movie: IMovies | null) => void;
     selectMovie: (movie: IMovies | null) => void;
   };
+
+  const userId = localStorage.getItem('@USERID');
 
   useEffect(() => {
     const loadMovie = async () => {
@@ -89,12 +92,22 @@ export const RenderPage = () => {
           </StyledUpperSection>
           <Paragraph>{selectMovie.synopsis}</Paragraph>
           <div>
-            <div>
-              <Paragraph>Avaliações</Paragraph>
-              <button onClick={() => setIsOpen(true)}>Avaliar</button>
-            </div>
+            {userId == null ? (
+              <div>
+                <Paragraph>Avaliações</Paragraph>
+
+                <button>Avaliar</button>
+              </div>
+            ) : (
+              <SectionUser setIsOpen={setIsOpen} />
+            )}
+
             {selectMovie.reviews.map((review, index) => (
-              <ReviewsCard review={review} index={index}/>
+              <ReviewsCard
+                review={review}
+                index={index}
+                setIsOpenAtt={setIsOpenAtt}
+              />
             ))}
           </div>
           {isOpen ? <Modal setIsOpen={setIsOpen} /> : null}

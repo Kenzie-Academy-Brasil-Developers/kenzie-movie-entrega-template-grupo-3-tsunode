@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Paragraph } from '../../styles/typography';
 import { api } from '../../services/api';
 
-export const ReviewsCard = ({ review, index }) => {
+export const ReviewsCard = ({ review, index, setIsOpenAtt }) => {
   const [user, setUser] = useState('');
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export const ReviewsCard = ({ review, index }) => {
   }, []);
 
   return (
-    <div key={index}>
+    <div key={index} setIsOpenAtt={setIsOpenAtt}>
       <Paragraph>{user[0]}</Paragraph>
       <Paragraph>{review.score}</Paragraph>
       <Paragraph>{review.description}</Paragraph>

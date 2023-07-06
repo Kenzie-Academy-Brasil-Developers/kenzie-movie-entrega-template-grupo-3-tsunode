@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
 
 export const Modal = ({ setIsOpen }) => {
   const { register, handleSubmit } = useForm<FormData>({});
@@ -22,29 +23,37 @@ export const Modal = ({ setIsOpen }) => {
 
   const createReview = async (formData: FormData) => {
     console.log(formData);
-    try {
-      console.log(`${token}`);
-      await api.post(
-        `/reviews`,
-        {
-          movieId: localMovieId,
-          userId: userId,
-          description: formData.description,
-          score: Number(formData.score),
-        },
-        header
-      );
-      console.log('Sucesso');
-      toast.success('Usuário cadastrado com sucesso');
-    } catch (error) {
-      console.log(error);
-      toast.error('Erro ao cadastrar usuário');
+    if (userId == null) {
+      alert('Cadastre-se');
+    } else {
+      try {
+        console.log(`${token}`);
+        await api.post(
+          `/reviews`,
+          {
+            movieId: localMovieId,
+            userId: userId,
+            description: formData.description,
+            score: Number(formData.score),
+          },
+          header
+        );
+        console.log('Sucesso');
+        toast.success('Usuário cadastrado com sucesso');
+      } catch (error) {
+        console.log(error);
+        toast.error('Erro ao cadastrar usuário');
+      } finally {
+        location.reload();
+      }
     }
   };
+
   const submit = (formData: FormData) => {
     console.log(formData);
     console.log(`esse é o token ${token}`);
     createReview(formData);
+    /* location.reload(); */
   };
 
   return (
@@ -72,7 +81,7 @@ export const Modal = ({ setIsOpen }) => {
           placeholder="Deixe um comentário"
           {...register('description')}
         ></textarea>
-        <button>Cadastrar avaliação</button>
+        <button handle>Cadastrar avaliação</button>
       </form>
 
       <button onClick={() => [setIsOpen(false), { ...register('movieId') }]}>

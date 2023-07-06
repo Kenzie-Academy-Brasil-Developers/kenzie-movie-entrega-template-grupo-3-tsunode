@@ -16,20 +16,9 @@ export const ModalContext = createContext<ModalContextProps>({
 export const MovieProvider = ({ children }: MovieProviderProps) => {
   const [selectMovie, setSelectMovie] = useState<IMovies | null>(null);
 
-  const averageReview = () => {
-    const reviews = selectMovie?.reviews.map((review) => {
-      return review.score;
-    });
-    const sum = reviews?.reduce((acc, cur) => {
-      return acc + cur;
-    }, 0);
-    const average = sum / reviews?.length;
-    return average;
-  };
-
   return (
     <MovieContext.Provider
-      value={{ selectMovie, setSelectMovie, averageReview }}
+      value={{ selectMovie, setSelectMovie }}
     >
       {children}
     </MovieContext.Provider>
