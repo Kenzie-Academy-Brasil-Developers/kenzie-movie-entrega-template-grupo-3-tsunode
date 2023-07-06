@@ -1,28 +1,28 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Paragraph } from '../../styles/typography';
 import { api } from '../../services/api';
 
 export const ReviewsCard = ({ review, index }) => {
+  const [user, setUser] = useState('');
 
   useEffect(() => {
     const getUserName = async () => {
       try {
         const { data } = await api.get(`/users/${review.userId}`);
-        const user = data
-        console.log(user);
+        setUser(data.name);
       } catch (error) {
         console.log(error.message);
       }
     };
     getUserName();
   }, []);
-  
+
   return (
     <div key={index}>
-      <Paragraph>Filme: {review.movieId}</Paragraph>
-      <Paragraph>Usuário: {review.userId}</Paragraph>
-      <Paragraph>Comentário: {review.description}</Paragraph>
-      <Paragraph>Nota: {review.score}</Paragraph>
+      <Paragraph>{user[0]}</Paragraph>
+      <Paragraph>{review.score}</Paragraph>
+      <Paragraph>{review.description}</Paragraph>
+      <Paragraph>{user}</Paragraph>
     </div>
   );
 };
