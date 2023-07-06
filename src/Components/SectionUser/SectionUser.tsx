@@ -21,6 +21,28 @@ export const SectionUser = ({ setIsOpen, setIsOpenAtt }) => {
     };
     userReview();
   }, []);
+  
+  const token = localStorage.getItem('@TOKEN');
+
+  const header = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const deleteReview = async () => {
+    const userId = localStorage.getItem('@USERID');
+    console.log(userId)
+    try {
+      const { data } = await api.delete(
+        `/reviews/${userId}`, header
+      );
+      console.log('excluido com sucesso')
+    } catch (error) {
+      console.log(error);
+    }
+  };
+ 
 
   return (
     <>
@@ -33,10 +55,10 @@ export const SectionUser = ({ setIsOpen, setIsOpenAtt }) => {
       ) : (
         <div>
           <p>Sua Descrição</p>
-          <p>{reviewsNumber[0].description}</p>
-          <p>{reviewsNumber[0].score}</p>
+          <p>{reviewsNumber.description}</p>
+          <p>{reviewsNumber.score}</p>
           <button onClick={ () => setIsOpenAtt(true)}>Editar</button>
-          <button>Excluir</button>
+          <button onClick={ () => deleteReview()}>Excluir</button>
         </div>
       )}
     </>

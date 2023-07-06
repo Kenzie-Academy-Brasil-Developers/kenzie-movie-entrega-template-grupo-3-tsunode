@@ -23,6 +23,8 @@ export const RenderPage = () => {
 
   const userId = localStorage.getItem('@USERID');
 
+  
+
   useEffect(() => {
     const loadMovie = async () => {
       const movieId = localStorage.getItem('@LOCALMOVIEID');
