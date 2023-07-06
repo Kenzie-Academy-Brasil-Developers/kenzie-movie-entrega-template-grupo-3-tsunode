@@ -7,8 +7,10 @@ import { Paragraph, Title2 } from '../../styles/typography';
 import { api } from '../../services/api';
 import { Header } from '../../Components/Header/Header';
 import { Footer } from '../../Components/Footer/Foot';
+import { Modal } from '../../Components/Modal/Modal';
 
 export const RenderPage = () => {
+  const [isOpen , setIsOpen] = useState(false)
   const [averageScore, setAverageScore] = useState(null);
   const { setSelectMovie, selectMovie } = useContext(MovieContext) as {
     setSelectMovie: (movie: IMovies | null) => void;
@@ -86,6 +88,7 @@ export const RenderPage = () => {
           <div>
             <div>
               <Paragraph>Avaliações</Paragraph>
+              <button onClick={() => setIsOpen(true)}>Avaliar</button>
             </div>
             {selectMovie.reviews.map((review, index) => (
               <div key={index}>
@@ -96,6 +99,7 @@ export const RenderPage = () => {
               </div>
             ))}
           </div>
+          {isOpen ? <Modal setIsOpen={setIsOpen} /> : null}
           <Footer />
         </div>
       )}
