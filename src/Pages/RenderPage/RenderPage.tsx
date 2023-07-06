@@ -8,9 +8,11 @@ import { api } from '../../services/api';
 import { Header } from '../../Components/Header/Header';
 import { Footer } from '../../Components/Footer/Foot';
 import { Modal } from '../../Components/Modal/Modal';
+import { ModalAtt } from '../../Components/ModalAtt/Modal';
 
 export const RenderPage = () => {
   const [isOpen , setIsOpen] = useState(false)
+  const [isOpenAtt , setIsOpenAtt] = useState(false)
   const [averageScore, setAverageScore] = useState(null);
   const { setSelectMovie, selectMovie } = useContext(MovieContext) as {
     setSelectMovie: (movie: IMovies | null) => void;
@@ -100,6 +102,7 @@ export const RenderPage = () => {
             ))}
           </div>
           {isOpen ? <Modal setIsOpen={setIsOpen} /> : null}
+          {isOpenAtt ? <ModalAtt setIsOpenAtt={setIsOpenAtt} /> : null}
           <Footer />
         </div>
       )}

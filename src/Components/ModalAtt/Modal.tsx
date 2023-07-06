@@ -1,4 +1,4 @@
-export const Modal = ({setIsOpen}) => {
+export const ModalAtt = ({setIsOpenAtt}) => {
     return(
       <>
         <h2>Avaliação</h2>
@@ -19,7 +19,7 @@ export const Modal = ({setIsOpen}) => {
           <textarea name="" id="" cols="30" rows="10" placeholder="Deixe um comentário"></textarea>
         </form>
       
-        <button onClick={() => setIsOpen(false)}>fechar</button>
+        <button onClick={() => setIsOpenAtt(false)}>fechar</button>
       </>
       
     )
