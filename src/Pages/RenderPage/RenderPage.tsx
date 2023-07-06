@@ -15,15 +15,13 @@ import { SectionUser } from '../../Components/SectionUser/SectionUser';
 export const RenderPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAtt, setIsOpenAtt] = useState(false);
-  const [averageScore, setAverageScore] = useState(null);
+  const [averageScore, setAverageScore] = useState(null); //passou pro Context
   const { setSelectMovie, selectMovie } = useContext(MovieContext) as {
     setSelectMovie: (movie: IMovies | null) => void;
     selectMovie: (movie: IMovies | null) => void;
   };
 
   const userId = localStorage.getItem('@USERID');
-
-  
 
   useEffect(() => {
     const loadMovie = async () => {
@@ -37,7 +35,7 @@ export const RenderPage = () => {
     };
     loadMovie();
     setSelectMovie(null);
-  }, []);
+  }, []); //passou pro Context
 
   useEffect(() => {
     const fetchAverageReview = async () => {
@@ -65,7 +63,7 @@ export const RenderPage = () => {
       }
     };
     fetchAverageReview();
-  });
+  }); //passou pro Context
 
   /*  console.log(selectMovie); */
   return (
