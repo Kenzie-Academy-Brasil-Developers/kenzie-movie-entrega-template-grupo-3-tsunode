@@ -7,12 +7,6 @@ interface MovieProviderProps {
   children: ReactNode;
 }
 
-export const ModalContext = createContext<ModalContextProps>({
-  isOpen: false,
-  openModal: () => {},
-  closeModal: () => {},
-});
-
 export const MovieProvider = ({ children }: MovieProviderProps) => {
   const [selectMovie, setSelectMovie] = useState<IMovies | null>(null);
 

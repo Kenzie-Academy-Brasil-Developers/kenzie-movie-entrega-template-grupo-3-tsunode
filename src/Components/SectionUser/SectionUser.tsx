@@ -4,6 +4,7 @@ import { Paragraph } from '../../styles/typography';
 
 export const SectionUser = ({ setIsOpen, setIsOpenAtt }) => {
   const [reviewsNumber, setReviewsNumber] = useState([]);
+  const [reviewId , setReviewId] = useState('')
   useEffect(() => {
     const userReview = async () => {
       const movieId = localStorage.getItem('@LOCALMOVIEID');
@@ -13,8 +14,9 @@ export const SectionUser = ({ setIsOpen, setIsOpenAtt }) => {
           `/movies/${movieId}/reviews?userId=${userId}`
         );
 
+        setReviewId(data.reviews.id)
         setReviewsNumber(data);
-        console.log(reviewsNumber);
+        console.log('3');
       } catch (error) {
         console.log(error.message);
       }
@@ -43,7 +45,7 @@ export const SectionUser = ({ setIsOpen, setIsOpenAtt }) => {
     }
   };
  
-
+  // console.log(reviewsNumber)
   return (
     <>
       {reviewsNumber.length === 0 ? (
