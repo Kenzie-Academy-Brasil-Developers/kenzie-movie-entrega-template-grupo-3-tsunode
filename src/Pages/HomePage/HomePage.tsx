@@ -33,7 +33,6 @@ export const HomePage = () => {
       try {
         const { data } = await api.get<IMovies[]>('/movies?_embed=reviews');
         setMoviesList(data);
-        localStorage.setItem('MOVIEID', JSON.stringify(data));
       } catch (error) {
         console.log(error);
       }

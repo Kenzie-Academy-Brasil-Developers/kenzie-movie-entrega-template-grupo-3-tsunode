@@ -13,6 +13,7 @@ export const RenderPage = () => {
     setSelectMovie: (movie: IMovies | null) => void;
     selectMovie: (movie: IMovies | null) => void;
   };
+
   useEffect(() => {
     const loadMovie = async () => {
       const movieId = localStorage.getItem('@LOCALMOVIEID');
@@ -35,20 +36,16 @@ export const RenderPage = () => {
       const { data } = await api.get(`/movies/${movieId}?_embed=reviews`);
 
       const reviews = data.reviews.map((review: any) => {
-        console.log(review.movieId);
-        console.log(review.movieId);
-        console.log(review.score);
-        console.log(review.description)
         return {
           movieId: review.movieId,
           userId: review.userId,
-          score:review.score,
-          description:review.description
-        }
+          score: review.score,
+          description: review.description,
+        };
       });
-      console.log(reviews)
+      console.log(reviews);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
   fetchReviews();
@@ -57,9 +54,9 @@ export const RenderPage = () => {
     <>
       {selectMovie == null ? (
         <div>loading</div>
-      ) : 
+      ) : (
         <div>
-          <Header/>
+          <Header />
           <img src={selectMovie.image} />
           <StyledUpperSection>
             <SmallYellowButton buttonSize={10}>
@@ -75,22 +72,19 @@ export const RenderPage = () => {
           <div>
             <div>
               <Paragraph>Avaliações</Paragraph>
-              <button>Avaliar</button>
             </div>
-           {selectMovie.reviews.map((review, index) => (
+            {selectMovie.reviews.map((review, index) => (
               <div key={index}>
-                <Paragraph>{review.movieId}</Paragraph>
-                <Paragraph>{review.userId}</Paragraph>
-                <Paragraph>{review.description}</Paragraph>
-                <Paragraph>{review.score}</Paragraph>
+                <Paragraph>Filme{review.movieId}</Paragraph>
+                <Paragraph>Usuário{review.userId}</Paragraph>
+                <Paragraph>Comentário{review.description}</Paragraph>
+                <Paragraph>Nota{review.score}</Paragraph>
               </div>
-            )
-           )}
+            ))}
           </div>
-          <Footer/>
+          <Footer />
         </div>
-        
-      }
+      )}
     </>
   );
 };
