@@ -76,8 +76,8 @@ export const Register = (): JSX.Element => {
         <StyledButtonLine>
           <Button title="Cadastre-se" />
         </StyledButtonLine>
-      </StyledRegisterForm>
       <Footer/>
+      </StyledRegisterForm>
     </StyledRegister>
   );
 };

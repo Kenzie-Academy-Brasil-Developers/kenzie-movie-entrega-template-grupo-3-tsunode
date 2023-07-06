@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { IMovies } from '../../Pages/HomePage/HomePage';
 import { MovieContext } from '../../providers/MovieContext';
 import { StyledUpperSection } from '../../Components/MoviesCard/MoviesCardStyle';
@@ -9,6 +9,7 @@ import { Header } from '../../Components/Header/Header';
 import { Footer } from '../../Components/Footer/Foot';
 
 export const RenderPage = () => {
+  const [averageScore, setAverageScore] = useState(null);
   const { setSelectMovie, selectMovie } = useContext(MovieContext) as {
     setSelectMovie: (movie: IMovies | null) => void;
     selectMovie: (movie: IMovies | null) => void;
@@ -28,28 +29,35 @@ export const RenderPage = () => {
     setSelectMovie(null);
   }, []);
 
-  console.log(selectMovie);
+  useEffect(() => {
+    const fetchAverageReview = async () => {
+      const movieId = localStorage.getItem('@LOCALMOVIEID');
+      try {
+        // Fetch movie details
+        const { data } = await api.get(`/movies/${movieId}?_embed=reviews`);
+        setSelectMovie(data);
 
-  const fetchReviews = async () => {
-    const movieId = localStorage.getItem('@LOCALMOVIEID');
-    try {
-      const { data } = await api.get(`/movies/${movieId}?_embed=reviews`);
+        // Extract the score from the movie object
+        const reviews = selectMovie?.reviews.map((review) => {
+          return review.score;
+        });
 
-      const reviews = data.reviews.map((review: any) => {
-        return {
-          movieId: review.movieId,
-          userId: review.userId,
-          score: review.score,
-          description: review.description,
-        };
-      });
-      console.log(reviews);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetchReviews();
+        //Calculate avg score
+        const sum = reviews?.reduce((acc, cur) => {
+          return acc + cur;
+        }, 0);
 
+        const average = sum / reviews?.length;
+        setAverageScore(average);
+      } catch (error) {
+        console.log(error.message);
+        setAverageScore(null);
+      }
+    };
+    fetchAverageReview();
+  });
+
+  /*  console.log(selectMovie); */
   return (
     <>
       {selectMovie == null ? (
@@ -66,6 +74,13 @@ export const RenderPage = () => {
           </StyledUpperSection>
           <StyledUpperSection>
             <Title2>{selectMovie.name}</Title2>
+            <div>
+              {averageScore !== null ? (
+                <p> Avg Score {averageScore}</p>
+              ) : (
+                <p>loading...</p>
+              )}
+            </div>
             <Paragraph>colocar o score</Paragraph>
           </StyledUpperSection>
           <Paragraph>{selectMovie.synopsis}</Paragraph>
