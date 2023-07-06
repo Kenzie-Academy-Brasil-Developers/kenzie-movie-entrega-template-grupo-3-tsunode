@@ -9,6 +9,7 @@ import { Header } from '../../Components/Header/Header';
 import { Footer } from '../../Components/Footer/Foot';
 import { Modal } from '../../Components/Modal/Modal';
 import { ModalAtt } from '../../Components/ModalAtt/Modal';
+import { ReviewsCard } from '../../Components/ReviewsCard/ReviewsCard';
 
 export const RenderPage = () => {
   const [isOpen , setIsOpen] = useState(false)
@@ -93,12 +94,7 @@ export const RenderPage = () => {
               <button onClick={() => setIsOpen(true)}>Avaliar</button>
             </div>
             {selectMovie.reviews.map((review, index) => (
-              <div key={index}>
-                <Paragraph>Filme {review.movieId}</Paragraph>
-                <Paragraph>Usuário {review.userId}</Paragraph>
-                <Paragraph>Comentário {review.description}</Paragraph>
-                <Paragraph>Nota {review.score}</Paragraph>
-              </div>
+              <ReviewsCard review={review} index={index}/>
             ))}
           </div>
           {isOpen ? <Modal setIsOpen={setIsOpen} /> : null}
