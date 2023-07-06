@@ -60,7 +60,7 @@ export const Modal = ({ setIsOpen }) => {
     <>
       <h2>Avaliação</h2>
       <form action="" onSubmit={handleSubmit(submit)}>
-        <select name="avaliação" id="" {...register('score')}>
+        <select id="" {...register('score')}>
           <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -81,7 +81,7 @@ export const Modal = ({ setIsOpen }) => {
           placeholder="Deixe um comentário"
           {...register('description')}
         ></textarea>
-        <button handle>Cadastrar avaliação</button>
+        <button>Cadastrar avaliação</button>
       </form>
 
       <button onClick={() => [setIsOpen(false), { ...register('movieId') }]}>
