@@ -12,6 +12,7 @@ import {
 import { Paragraph, RegisterLink, Title1 } from "../../styles/typography";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+import { Footer } from "../Footer/Foot";
 
 interface IRegisterUser {
   name: string;
@@ -76,6 +77,7 @@ export const Register = (): JSX.Element => {
           <Button title="Cadastre-se" />
         </StyledButtonLine>
       </StyledRegisterForm>
+      <Footer/>
     </StyledRegister>
   );
 };
