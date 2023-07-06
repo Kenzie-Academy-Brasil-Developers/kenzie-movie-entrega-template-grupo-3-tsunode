@@ -13,6 +13,15 @@ import { Paragraph, RegisterLink, Title1 } from "../../styles/typography";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { Footer } from "../Footer/Foot";
+import { z } from "zod";
+
+const passwordSchema = z
+  .string()
+  .min(8, "A senha deve ter no mínimo 8 caracteres")
+  .regex(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+    "A senha deve conter letras maiúsculas, letras minúsculas, números e símbolos"
+  );
 
 interface IRegisterUser {
   name: string;
@@ -26,7 +35,14 @@ export const Register = (): JSX.Element => {
 
   const createUser = async (formData: IRegisterUser) => {
     console.log(formData);
+
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("A senha e a confirmação de senha não correspondem");
+      return;
+    }
     try {
+      passwordSchema.parse(formData.password);
+
       const { data } = await api.post("/users", {
         email: formData.email,
         password: formData.password,
@@ -36,6 +52,7 @@ export const Register = (): JSX.Element => {
       toast.success("Usuário cadastrado com sucesso");
     } catch (error) {
       console.log(error);
+
       toast.error("Erro ao cadastrar usuário");
     }
   };
@@ -76,7 +93,7 @@ export const Register = (): JSX.Element => {
         <StyledButtonLine>
           <Button title="Cadastre-se" />
         </StyledButtonLine>
-      <Footer/>
+        <Footer />
       </StyledRegisterForm>
     </StyledRegister>
   );
