@@ -13,26 +13,26 @@ export const SectionUser = () => {
 
 
   useEffect(() => {
-    const userReview = async () => {
+    const userReviewFunction = async () => {
       const movieId = localStorage.getItem('@LOCALMOVIEID');
       console.log(movieId)
       const userId = localStorage.getItem('@USERID');
       console.log(userId)
       try {
-        const res = await api.get(
+        const { data } = await api.get(
           `/movies/${movieId}/reviews?userId=${userId}`
         );
       
-        // setUserReview(data)
-        // setUserReviewId(data[0].id);
-        console.log(res)
+        console.log(data)
+        setUserReview(data[0])
+        setUserReviewId(data[0].id);
         console.log('certo')
       } catch (error) {
         console.log(error.message);
         console.log('deu errado')
       }
     };
-    userReview();
+    userReviewFunction();
   }, []);
   
   const token = localStorage.getItem('@TOKEN');
@@ -60,7 +60,8 @@ export const SectionUser = () => {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>Avaliar</button>
-      {/* {userReview.length === 0 ? (
+      <button onClick={() => {console.log(userReview, userReviewId)}}> teste </button>
+      {userReview == undefined ? (
         <div>
           <Paragraph>Avaliações</Paragraph>
 
@@ -70,12 +71,12 @@ export const SectionUser = () => {
       ) : (
         <div>
           <p>Sua Descrição</p>
-          <p>{reviewsNumber.description}</p>
-          <p>{reviewsNumber.score}</p>
+          <p>{userReview.description}</p>
+          <p>{userReview.score}</p>
           <button onClick={ () => setIsOpenAtt(true)}>Editar</button>
           <button onClick={ () => deleteReview()}>Excluir</button>
         </div>
-      )} */}
+      )}
     </>
   );
 };
