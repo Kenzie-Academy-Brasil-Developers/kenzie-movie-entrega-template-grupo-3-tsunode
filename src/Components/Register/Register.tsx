@@ -36,35 +36,10 @@ interface IRegisterUser {
 export const Register = (): JSX.Element => {
   const { register, handleSubmit } = useForm<IRegisterUser>();
 
-  // const createUser = async (formData: IRegisterUser) => {
-  //   console.log(formData);
-
-  //   if (formData.password !== formData.confirmPassword) {
-  //     toast.error("A senha e a confirmação de senha não correspondem");
-  //     return;
-  //   }
-  //   try {
-  //     passwordSchema.parse(formData.password);
-
-  //     const { data } = await api.post("/users", {
-  //       email: formData.email,
-  //       password: formData.password,
-  //       name: formData.name,
-  //     });
-  //     console.log("Sucesso");
-  //     toast.success("Usuário cadastrado com sucesso");
-  //   } catch (error) {
-  //     console.log(error);
-
-  //     toast.error("Erro ao cadastrar usuário");
-  //   }
-  // };
-
-
+ 
   const { createUser } = useContext(UserContext)
 
   const onSubmit: SubmitHandler<IRegisterUser> = (formData: IRegisterUser) => {
-    console.log(formData);
     createUser(formData);
 
   };

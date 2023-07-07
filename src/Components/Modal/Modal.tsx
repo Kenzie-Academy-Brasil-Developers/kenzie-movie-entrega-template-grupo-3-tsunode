@@ -26,39 +26,10 @@ export const Modal = () => {
     description: string;
   }
 
-  // const createReview = async (formData: FormData) => {
-  //   console.log(formData);
-  //   if (userId == null) {
-  //     alert('Cadastre-se');
-  //   } else {
-  //     try {
-  //       console.log(`${token}`);
-  //       await api.post(
-  //         `/reviews`,
-  //         {
-  //           movieId: localMovieId,
-  //           userId: userId,
-  //           description: formData.description,
-  //           score: Number(formData.score),
-  //         },
-  //         header
-  //       );
-  //       console.log('Sucesso');
-  //       toast.success('Usuário cadastrado com sucesso');
-  //     } catch (error) {
-  //       console.log(error);
-  //       toast.error('Erro ao cadastrar usuário');
-  //     } finally {
-  //       location.reload();
-  //     }
-  //   }
-  // };
 
   const { createReview } = useContext(ReviewContext)
 
   const submit = (formData: FormData) => {
-    console.log(formData);
-    console.log(`esse é o token ${token}`);
     createReview(formData);
   };
 

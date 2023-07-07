@@ -27,7 +27,7 @@ export const Header = () => {
                 <img src={logo} alt="" /> 
                 <div>
                     <div>
-                        <button>{name[1]}</button>
+                        <button>{name[0]}</button>
                         <p>{name}</p>
                     </div>
                     <button onClick={() => {localStorage.clear() , navigate('/')}}>Sair</button>

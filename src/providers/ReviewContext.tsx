@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext } from "react";
+import { ReactNode, createContext, useContext, useEffect } from "react";
 import { api } from "../services/api";
 import { MovieContext } from "./MovieContext";
 
@@ -18,7 +18,7 @@ export const ReviewContext = createContext({} as IReviewContext);
 
 export const ReviewProvider = ({ children }: ReviewProviderProps) => {
   
-const { setReviews, reviews } = useContext(MovieContext)
+const { setReviews, reviews, setUserReview } = useContext(MovieContext)
 
 const localMovieId = localStorage.getItem('@LOCALMOVIEID')
 
@@ -48,9 +48,10 @@ const createReview = async (formData) => {
           header
         );
         setReviews(() => [...reviews, data])
-        console.log('Sucesso');
       } catch (error) {
         console.log(error);
+      }finally{
+        window.location.reload()
       }
 };
 
@@ -67,7 +68,6 @@ const attReview = async (formData,reviewId) => {
           },
           header
         );
-        console.log('Sucesso');
       } catch (error) {
         console.log(error);
       } finally {
@@ -81,7 +81,6 @@ const deleteReview = async (reviewId) => {
           `/reviews/${reviewId}`,
           header
         );
-        console.log('Sucesso');
       } catch (error) {
         console.log(error);
       } finally {

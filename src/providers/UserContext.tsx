@@ -1,5 +1,6 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
+import { MovieContext } from "./MovieContext";
 
 
 
@@ -42,7 +43,6 @@ const [isOpen, setIsOpen] = useState(false);
 
 const [isOpenAtt, setIsOpenAtt] = useState(false);
 
-
 const token = localStorage.getItem('@TOKEN')
 
 const userId = localStorage.getItem('@USERID')
@@ -60,7 +60,6 @@ const createUser = async (formData) => {
         password: formData.password,
         name: formData.name,
       });
-      console.log("Sucesso");
     } catch (error) {
       console.log(error);
     }
@@ -72,7 +71,6 @@ const loginUser = async (formData) => {
       localStorage.setItem('@TOKEN', data.accessToken);
       localStorage.setItem('@USERID', data.user.id);
       localStorage.setItem('@USERNAME', data.user.name);
-      console.log('sucesso')
     } catch (error) {
       console.log(error);
     }
@@ -90,23 +88,23 @@ const loginUser = async (formData) => {
     getUsers();
   }, []);
 
-  useEffect(() => {
-    if(userId == null){
-        console.log('sem usuario logado')
-    }else{
-        const getUserUnique = async () => {
-            try {
-              const { data } = await api.get(`/users/${userId}`);
-              setUser(data)
-              console.log('achou o usuário')
-            } catch (error) {
-              console.log(error.message);
-            }
-          };
-        getUserUnique();
-    }
+  // useEffect(() => {
+  //   if(userId == null){
+  //       console.log('sem usuario logado')
+  //   }else{
+  //       const getUserUnique = async () => {
+  //           try {
+  //             const { data } = await api.get(`/users/${userId}`);
+  //             setUser(data)
+  //             console.log('achou o usuário')
+  //           } catch (error) {
+  //             console.log(error.message);
+  //           }
+  //         };
+  //       getUserUnique();
+  //   }
     
-  }, []);
+  // }, []);
     
   
 

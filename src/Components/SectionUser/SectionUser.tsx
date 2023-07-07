@@ -21,10 +21,8 @@ export const SectionUser = () => {
           `/movies/${movieId}/reviews?userId=${userId}`
         );
       
-        console.log(data)
         setUserReview(data[0])
-        // setUserReviewId(data[0].id);
-        // console.log('certo')
+        setUserReviewId(data[0].id);
       } catch (error) {
         console.log(error.message);
       }
@@ -33,7 +31,6 @@ export const SectionUser = () => {
   }, []);
   
   const token = localStorage.getItem('@TOKEN');
-
   const header = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -42,7 +39,6 @@ export const SectionUser = () => {
 
   const deleteReview = async () => {
     const userId = localStorage.getItem('@USERID');
-    console.log(userId)
     try {
       const { data } = await api.delete(
         `/reviews/${userId}`, header
@@ -53,12 +49,9 @@ export const SectionUser = () => {
     }
   };
  
-  // console.log(reviewsNumber)
   return (
     <>
-      <button onClick={() => setIsOpen(true)}>Avaliar</button>
-      <button onClick={() => {console.log(userReview)}}> teste </button>
-      {userReview == undefined ? (
+      {userReview == undefined  ? (
         <div>
           <Paragraph>Avaliações</Paragraph>
 
