@@ -15,9 +15,7 @@ export const SectionUser = () => {
   useEffect(() => {
     const userReviewFunction = async () => {
       const movieId = localStorage.getItem('@LOCALMOVIEID');
-      console.log(movieId)
       const userId = localStorage.getItem('@USERID');
-      console.log(userId)
       try {
         const { data } = await api.get(
           `/movies/${movieId}/reviews?userId=${userId}`
@@ -25,11 +23,10 @@ export const SectionUser = () => {
       
         console.log(data)
         setUserReview(data[0])
-        setUserReviewId(data[0].id);
-        console.log('certo')
+        // setUserReviewId(data[0].id);
+        // console.log('certo')
       } catch (error) {
         console.log(error.message);
-        console.log('deu errado')
       }
     };
     userReviewFunction();
@@ -60,7 +57,7 @@ export const SectionUser = () => {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>Avaliar</button>
-      <button onClick={() => {console.log(userReview, userReviewId)}}> teste </button>
+      <button onClick={() => {console.log(userReview)}}> teste </button>
       {userReview == undefined ? (
         <div>
           <Paragraph>Avaliações</Paragraph>

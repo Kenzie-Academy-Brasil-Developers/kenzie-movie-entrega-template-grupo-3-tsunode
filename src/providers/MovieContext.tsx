@@ -107,52 +107,6 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
   }, []);
  
 
-  // Get /movies/:idMovie/reviews?userId=:idUser
-
-  
-    useEffect(() => {
-      const userReviewFunction = async (userId,movieId) => {
-        try {
-          const { data } = await api.get(`/movies/${movieId}/reviews?userId=${userId}`);
-          setUserReview(data);
-          setUserReview(data.id);
-        } catch (error) {
-          console.log(error.message);
-        }
-      };
-      userReviewFunction();
-    }, []);
-  
-
-  //CALCULATE AVERAGE SCORE
-  useEffect(() => {
-    const fetchAverageReview = async () => {
-      const movieId = localStorage.getItem('@LOCALMOVIEID');
-      try {
-        // Fetch movie details
-        const { data } = await api.get(`/movies/${movieId}?_embed=reviews`);
-        setSelectMovie(data);
-
-        // Extract the score from the movie object
-        const reviews = selectMovie?.reviews.map((review) => {
-          return review.score;
-        });
-
-        //Calculate avg score
-        const sum = reviews?.reduce((acc, cur) => {
-          return acc + cur;
-        }, 0);
-
-        const average = sum / reviews?.length;
-        setAverageScore(average);
-      } catch (error) {
-        console.log(error.message);
-        setAverageScore(null);
-      }
-    };
-    fetchAverageReview();
-  });
-
   return (
     <MovieContext.Provider
       value={{
