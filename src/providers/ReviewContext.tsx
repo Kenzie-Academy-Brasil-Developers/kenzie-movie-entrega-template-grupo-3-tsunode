@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useContext, useEffect } from "react";
 import { api } from "../services/api";
 import { MovieContext } from "./MovieContext";
+import { UserContext } from "./UserContext";
 
 
 
@@ -10,21 +11,25 @@ interface ReviewProviderProps {
 
 interface IReviewContext{
   createReview: (formData: any) => Promise<void>;
-  attReview: (formData: any, reviewId: any) => Promise<void>;
-  deleteReview: (reviewId: any) => Promise<void>
+  attReview: (formData: any) => Promise<void>;
+  deleteReview: (reviewId: any) => Promise<void>;
 }
 
 export const ReviewContext = createContext({} as IReviewContext);
 
 export const ReviewProvider = ({ children }: ReviewProviderProps) => {
   
-const { setReviews, reviews, setUserReview } = useContext(MovieContext)
+const { setReviews, reviews, setUserReview, userReviewId } = useContext(MovieContext)
+
+const { setIsOpenAtt } = useContext(UserContext)
 
 const localMovieId = localStorage.getItem('@LOCALMOVIEID')
 
 const token = localStorage.getItem('@TOKEN')
 
 const userId = localStorage.getItem('@USERID')
+
+
 
 const header = {
     headers: {
@@ -56,22 +61,28 @@ const createReview = async (formData) => {
 };
 
 
-const attReview = async (formData,reviewId) => {
+const attReview = async (formData) => {
     try {
         await api.put(
-          `/reviews/${reviewId}`,
+          `/reviews/${userReviewId}`,
           {
-            movieId: localMovieId,
-            userId: userId,
+            movieId: Number(localMovieId),
+            userId: Number(userId),
             description: formData.description,
             score: Number(formData.score),
           },
           header
         );
+        const reviewsAtualizado = reviews.find((item) => item.id == userReviewId)
+        reviewsAtualizado.score = formData.score
+        reviewsAtualizado.description = formData.description
+        console.log(reviewsAtualizado)
+        console.log('sucesso')
+        setReviews(() => [...reviews])
+        setIsOpenAtt(false)
       } catch (error) {
         console.log(error);
-      } finally {
-        location.reload();
+        console.log('erro')
       }
 };
 

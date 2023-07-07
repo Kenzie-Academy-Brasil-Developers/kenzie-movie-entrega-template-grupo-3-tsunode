@@ -74,7 +74,7 @@ export const RenderPage = () => {
               <div>
                 <Paragraph>Avaliações</Paragraph>
 
-                <button>Avaliar</button>
+                <button onClick={() => {alert('Esteja logado para poder avaliar')}}>Avaliar</button>
               </div>
             ) : (
               <SectionUser  />
