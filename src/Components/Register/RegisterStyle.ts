@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 export const StyledRegister = styled.div`
   width: 100%;
@@ -29,9 +29,9 @@ export const StyledRegisterForm = styled.form`
       font-family: var(--ff);
       font-weight: 700;
     }
-    input{
-        width: auto;
-        flex-grow: 1;
+    input {
+      width: auto;
+      flex-grow: 1;
     }
   }
 `;

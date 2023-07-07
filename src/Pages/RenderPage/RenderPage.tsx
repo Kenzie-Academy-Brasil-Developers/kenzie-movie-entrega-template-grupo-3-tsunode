@@ -14,12 +14,10 @@ import { UserContext } from '../../providers/UserContext';
 import { ModalDelete } from '../../Components/ModalDelete/Modal';
 
 export const RenderPage = () => {
-  
-  
-  const { setMovieWithReview , setReviews, movieWithReview, reviews } = useContext(MovieContext)
+  const { setMovieWithReview, setReviews, movieWithReview, reviews } =
+    useContext(MovieContext);
 
-  const { isOpen, isOpenAtt, isOpenDelete } = useContext(UserContext)
-
+  const { isOpen, isOpenAtt, isOpenDelete } = useContext(UserContext);
 
   const userId = localStorage.getItem('@USERID');
 
@@ -30,7 +28,6 @@ export const RenderPage = () => {
         const { data } = await api.get(`/movies/${movieId}?_embed=reviews`);
         setMovieWithReview(data);
         setReviews(data.reviews);
-
       } catch (error) {
         console.log(error.message);
       }
@@ -45,8 +42,6 @@ export const RenderPage = () => {
 
   const average = sum / reviews?.length;
 
-  
- 
   return (
     <>
       {movieWithReview == null ? (
@@ -64,9 +59,7 @@ export const RenderPage = () => {
           <StyledUpperSection>
             <Title2>{movieWithReview.name}</Title2>
             <div>
-              
-                <Paragraph>{average}</Paragraph>
-    
+              <Paragraph>{average}</Paragraph>
             </div>
           </StyledUpperSection>
           <Paragraph>{movieWithReview.synopsis}</Paragraph>
@@ -75,24 +68,32 @@ export const RenderPage = () => {
               <div>
                 <Paragraph>Avaliações</Paragraph>
 
-                <button onClick={() => {alert('Esteja logado para poder avaliar')}}>Avaliar</button>
+                <button
+                  onClick={() => {
+                    alert('Esteja logado para poder avaliar');
+                  }}
+                >
+                  Avaliar
+                </button>
               </div>
             ) : (
-              <SectionUser  />
+              <SectionUser />
             )}
 
             {reviews.map((review, index) => (
-              <ReviewsCard
-                review={review}
-                index={index}
-                
-              />
+              <ReviewsCard review={review} index={index} />
             ))}
           </div>
-          {isOpen ? <Modal/> : null}
+          {isOpen ? <Modal /> : null}
           {isOpenAtt ? <ModalAtt /> : null}
-          {isOpenDelete ? <ModalDelete/> : null}
-          <button onClick={() => {console.log(reviews)}}>ver reviews</button>
+          {isOpenDelete ? <ModalDelete /> : null}
+          <button
+            onClick={() => {
+              console.log(reviews);
+            }}
+          >
+            ver reviews
+          </button>
           <Footer />
         </div>
       )}

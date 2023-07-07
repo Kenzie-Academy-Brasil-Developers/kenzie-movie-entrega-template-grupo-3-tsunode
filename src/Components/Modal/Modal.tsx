@@ -6,9 +6,8 @@ import { UserContext } from '../../providers/UserContext';
 import { ReviewContext } from '../../providers/ReviewContext';
 
 export const Modal = () => {
-  
-  const {setIsOpen} = useContext(UserContext)
-  
+  const { setIsOpen } = useContext(UserContext);
+
   const { register, handleSubmit } = useForm<FormData>({});
 
   const token = localStorage.getItem('@TOKEN');
@@ -26,8 +25,7 @@ export const Modal = () => {
     description: string;
   }
 
-
-  const { createReview } = useContext(ReviewContext)
+  const { createReview } = useContext(ReviewContext);
 
   const submit = (formData: FormData) => {
     createReview(formData);

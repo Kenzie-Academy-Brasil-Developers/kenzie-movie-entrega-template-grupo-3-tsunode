@@ -1,7 +1,7 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 export const StyledLoginSection = styled.section`
-  background-image: url("../../../src/assets/Rectangle 13.png");
+  background-image: url('../../../src/assets/Rectangle 13.png');
   background-size: cover;
   height: 80vh;
 `;
@@ -25,4 +25,4 @@ export const LoginLowerSection = styled.div`
   flex-direction: column;
   text-align: center;
   padding-bottom: 1rem;
-`
+`;

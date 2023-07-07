@@ -5,12 +5,8 @@ import { MoviesCard } from '../MoviesCard/MoviesCard';
 import { StyledList, StyledListSection } from './MoviesList';
 import { MovieContext } from '../../providers/MovieContext';
 
-
-
-
 export const MoviesList = () => {
-
-  const { allMoviewsWithReview } = useContext(MovieContext)
+  const { allMoviewsWithReview } = useContext(MovieContext);
 
   return (
     <StyledListSection>

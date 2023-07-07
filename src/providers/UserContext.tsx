@@ -1,18 +1,22 @@
-import { ReactNode, createContext, useContext, useEffect, useState } from "react";
-import { api } from "../services/api";
-import { MovieContext } from "./MovieContext";
-
-
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { api } from '../services/api';
+import { MovieContext } from './MovieContext';
 
 interface UserProviderProps {
-    children: ReactNode;
+  children: ReactNode;
 }
-  
-interface IUser{ 
-	email: string;
-	name: string;
-	age: number;
-	id: number;
+
+interface IUser {
+  email: string;
+  name: string;
+  age: number;
+  id: number;
 }
 
 interface IUserContext {
@@ -20,7 +24,7 @@ interface IUserContext {
   loginUser: (formData: any) => Promise<void>;
   users: IUser[];
   setUsers: React.Dispatch<React.SetStateAction<IUser[]>>;
-  user:  IUser | undefined;
+  user: IUser | undefined;
   setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,29 +32,24 @@ interface IUserContext {
   setIsOpenAtt: React.Dispatch<React.SetStateAction<boolean>>;
   isOpenDelete: boolean;
   setIsOpenDelete: React.Dispatch<React.SetStateAction<boolean>>;
-
 }
-
-
 
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
+  const [users, setUsers] = useState<IUser[]>([]);
 
-const [users, setUsers] = useState<IUser[]>([]);
+  const [user, setUser] = useState<IUser>();
 
-const [user, setUser] = useState<IUser>();
+  const [isOpen, setIsOpen] = useState(false);
 
-const [isOpen, setIsOpen] = useState(false);
+  const [isOpenAtt, setIsOpenAtt] = useState(false);
 
-const [isOpenAtt, setIsOpenAtt] = useState(false);
+  const [isOpenDelete, setIsOpenDelete] = useState(false);
 
-const [isOpenDelete, setIsOpenDelete] = useState(false);
-
-
-const createUser = async (formData) => {
+  const createUser = async (formData) => {
     try {
-      const { data } = await api.post("/users", {
+      const { data } = await api.post('/users', {
         email: formData.email,
         password: formData.password,
         name: formData.name,
@@ -58,9 +57,9 @@ const createUser = async (formData) => {
     } catch (error) {
       console.log(error);
     }
-};
+  };
 
-const loginUser = async (formData) => {
+  const loginUser = async (formData) => {
     try {
       const { data } = await api.post('/login', formData);
       localStorage.setItem('@TOKEN', data.accessToken);
@@ -83,25 +82,24 @@ const loginUser = async (formData) => {
     getUsers();
   }, []);
 
-
-    return (
-      <UserContext.Provider
-        value={{
-          createUser,
-          loginUser,
-          users,
-          setUsers,
-          user,
-          setUser,
-          isOpen,
-          setIsOpen,
-          isOpenAtt,
-          setIsOpenAtt,
-          isOpenDelete,
-          setIsOpenDelete
-        }}
-      >
-        {children}
-      </UserContext.Provider>
-    );
-  };
+  return (
+    <UserContext.Provider
+      value={{
+        createUser,
+        loginUser,
+        users,
+        setUsers,
+        user,
+        setUser,
+        isOpen,
+        setIsOpen,
+        isOpenAtt,
+        setIsOpenAtt,
+        isOpenDelete,
+        setIsOpenDelete,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
+};

@@ -5,15 +5,13 @@ interface MovieProviderProps {
   children: ReactNode;
 }
 
-interface IAllmovies{
-  
-    id: number;
-    name: string;
-    type: string;
-    duration: number;
-    synopsis: string;
-    image: string;
-  
+interface IAllmovies {
+  id: number;
+  name: string;
+  type: string;
+  duration: number;
+  synopsis: string;
+  image: string;
 }
 interface IMovies {
   id: number;
@@ -33,15 +31,12 @@ interface IMovies {
 }
 
 interface IReview {
-  
-    id: number;
-    movieId: number;
-    userId: number;
-    score: number;
-    description: string;
-
+  id: number;
+  movieId: number;
+  userId: number;
+  score: number;
+  description: string;
 }
-
 
 interface IMovieListContext {
   selectMovie: IMovies | null;
@@ -50,12 +45,12 @@ interface IMovieListContext {
   setAverageScore: React.Dispatch<React.SetStateAction<null>>;
   moviesList: IMovies[];
   setMoviesList: React.Dispatch<React.SetStateAction<IMovies[]>>;
-  allMovies:  IAllmovies[];
-  setAllmovies:  React.Dispatch<React.SetStateAction<IAllmovies[]>>;
+  allMovies: IAllmovies[];
+  setAllmovies: React.Dispatch<React.SetStateAction<IAllmovies[]>>;
   allMoviewsWithReview: IMovies[];
-  setAllMoviesWithReview:  React.Dispatch<React.SetStateAction<IMovies[]>>;
-  reviews: IReview[]; 
-  setReviews:  React.Dispatch<React.SetStateAction<IReview[]>>;
+  setAllMoviesWithReview: React.Dispatch<React.SetStateAction<IMovies[]>>;
+  reviews: IReview[];
+  setReviews: React.Dispatch<React.SetStateAction<IReview[]>>;
   userReview: IReview[];
   setUserReview: React.Dispatch<React.SetStateAction<IReview[]>>;
   userReviewId: number;
@@ -71,12 +66,13 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
   const [averageScore, setAverageScore] = useState(null);
   const [moviesList, setMoviesList] = useState<IMovies[]>([]);
   const [allMovies, setAllmovies] = useState<IAllmovies[]>([]); // allmovies
-  const [allMoviewsWithReview, setAllMoviesWithReview] = useState<IMovies[]>([]); //allmovieswithreview
+  const [allMoviewsWithReview, setAllMoviesWithReview] = useState<IMovies[]>(
+    []
+  ); //allmovieswithreview
   const [reviews, setReviews] = useState<IReview[]>([]);
   const [userReview, setUserReview] = useState<IReview[]>([]);
   const [userReviewId, setUserReviewId] = useState<number>(0);
   const [movieWithReview, setMovieWithReview] = useState<IMovies[]>([]);
-
 
   // GET /movies
   useEffect(() => {
@@ -92,10 +88,9 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
   }, []);
 
   // GET /movies/?_embed=reviews
-  
+
   useEffect(() => {
     const allMoviesWithReviewFunction = async () => {
-      
       try {
         const { data } = await api.get('/movies?_embed=reviews');
         setAllMoviesWithReview(data);
@@ -105,7 +100,6 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
     };
     allMoviesWithReviewFunction();
   }, []);
- 
 
   return (
     <MovieContext.Provider
@@ -125,10 +119,9 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
         userReview,
         setUserReview,
         userReviewId,
-        setUserReviewId ,
+        setUserReviewId,
         movieWithReview,
-        setMovieWithReview
-        
+        setMovieWithReview,
       }}
     >
       {children}

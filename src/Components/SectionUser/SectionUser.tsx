@@ -5,12 +5,10 @@ import { UserContext } from '../../providers/UserContext';
 import { MovieContext } from '../../providers/MovieContext';
 
 export const SectionUser = () => {
+  const { setIsOpen, setIsOpenAtt, setIsOpenDelete } = useContext(UserContext);
 
-  const {setIsOpen, setIsOpenAtt, setIsOpenDelete} = useContext(UserContext)
-
-  const { setUserReview, userReview, userReviewId, setUserReviewId} = useContext(MovieContext)
-
-
+  const { setUserReview, userReview, userReviewId, setUserReviewId } =
+    useContext(MovieContext);
 
   useEffect(() => {
     const userReviewFunction = async () => {
@@ -20,8 +18,8 @@ export const SectionUser = () => {
         const { data } = await api.get(
           `/movies/${movieId}/reviews?userId=${userId}`
         );
-      
-        setUserReview(data[0])
+
+        setUserReview(data[0]);
         setUserReviewId(data[0].id);
       } catch (error) {
         console.log(error.message);
@@ -29,7 +27,7 @@ export const SectionUser = () => {
     };
     userReviewFunction();
   }, []);
-  
+
   const token = localStorage.getItem('@TOKEN');
   const header = {
     headers: {
@@ -39,11 +37,10 @@ export const SectionUser = () => {
 
   return (
     <>
-      {userReview == undefined  ? (
+      {userReview == undefined ? (
         <div>
           <Paragraph>Avaliações</Paragraph>
 
-    
           <button onClick={() => setIsOpen(true)}>Avaliar</button>
         </div>
       ) : (
@@ -51,8 +48,8 @@ export const SectionUser = () => {
           <p>Sua Descrição</p>
           <p>{userReview.description}</p>
           <p>{userReview.score}</p>
-          <button onClick={ () => setIsOpenAtt(true)}>Editar</button>
-          <button onClick={ () => setIsOpenDelete(true) }>Excluir</button>
+          <button onClick={() => setIsOpenAtt(true)}>Editar</button>
+          <button onClick={() => setIsOpenDelete(true)}>Excluir</button>
         </div>
       )}
     </>

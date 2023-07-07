@@ -6,18 +6,17 @@ import { GlobalVariables } from './styles/Global';
 import { GlobalReset } from './styles/Reset';
 
 export const App = () => {
-
-  return(
+  return (
     <>
       <MovieProvider>
         <UserProvider>
           <ReviewProvider>
             <GlobalReset />
-            <GlobalVariables/>
-            <RoutesMain/>
+            <GlobalVariables />
+            <RoutesMain />
           </ReviewProvider>
         </UserProvider>
       </MovieProvider>
     </>
-  )
+  );
 };
