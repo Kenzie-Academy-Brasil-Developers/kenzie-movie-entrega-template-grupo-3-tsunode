@@ -20,7 +20,7 @@ export const ReviewProvider = ({ children }: ReviewProviderProps) => {
   
 const { setReviews, reviews } = useContext(MovieContext)
 
-const localMovieId = localStorage.getItem('@LOCALMOVEID')
+const localMovieId = localStorage.getItem('@LOCALMOVIEID')
 
 const token = localStorage.getItem('@TOKEN')
 
@@ -40,8 +40,8 @@ const createReview = async (formData) => {
         const { data } = await api.post(
           `/reviews`,
           {
-            movieId: localMovieId,
-            userId: userId,
+            movieId: Number(localMovieId),
+            userId: Number(userId),
             description: formData.description,
             score: Number(formData.score),
           },

@@ -54,12 +54,14 @@ interface IMovieListContext {
   setAllmovies:  React.Dispatch<React.SetStateAction<IAllmovies[]>>;
   allMoviewsWithReview: IMovies[];
   setAllMoviesWithReview:  React.Dispatch<React.SetStateAction<IMovies[]>>;
-  movieWithReview: IMovies[]
-  setMovieWithReview: React.Dispatch<React.SetStateAction<IMovies[]>>;
   reviews: IReview[]; 
   setReviews:  React.Dispatch<React.SetStateAction<IReview[]>>;
   userReview: IReview[];
   setUserReview: React.Dispatch<React.SetStateAction<IReview[]>>;
+  userReviewId: number;
+  setUserReviewId: React.Dispatch<React.SetStateAction<number>>;
+  movieWithReview: IMovies[];
+  setMovieWithReview: React.Dispatch<React.SetStateAction<IMovies[]>>;
 }
 
 export const MovieContext = createContext({} as IMovieListContext);
@@ -70,9 +72,10 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
   const [moviesList, setMoviesList] = useState<IMovies[]>([]);
   const [allMovies, setAllmovies] = useState<IAllmovies[]>([]); // allmovies
   const [allMoviewsWithReview, setAllMoviesWithReview] = useState<IMovies[]>([]); //allmovieswithreview
-  const [movieWithReview, setMovieWithReview] = useState<IMovies[]>();
   const [reviews, setReviews] = useState<IReview[]>([]);
   const [userReview, setUserReview] = useState<IReview[]>([]);
+  const [userReviewId, setUserReviewId] = useState<number>(0);
+  const [movieWithReview, setMovieWithReview] = useState<IMovies[]>([]);
 
 
   // GET /movies
@@ -112,6 +115,7 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
         try {
           const { data } = await api.get(`/movies/${movieId}/reviews?userId=${userId}`);
           setUserReview(data);
+          setUserReview(data.id);
         } catch (error) {
           console.log(error.message);
         }
@@ -162,12 +166,15 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
         setAllmovies,
         allMoviewsWithReview,
         setAllMoviesWithReview,
-        movieWithReview,
-        setMovieWithReview,
         reviews,
         setReviews,
         userReview,
         setUserReview,
+        userReviewId,
+        setUserReviewId ,
+        movieWithReview,
+        setMovieWithReview
+        
       }}
     >
       {children}

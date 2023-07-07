@@ -2,29 +2,34 @@ import { useContext, useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { Paragraph } from '../../styles/typography';
 import { UserContext } from '../../providers/UserContext';
+import { MovieContext } from '../../providers/MovieContext';
 
 export const SectionUser = () => {
-  const [reviewsNumber, setReviewsNumber] = useState([]);
-  const [reviewId , setReviewId] = useState('')
 
   const {setIsOpen, setIsOpenAtt} = useContext(UserContext)
+
+  const { setUserReview, userReview, userReviewId, setUserReviewId} = useContext(MovieContext)
 
 
 
   useEffect(() => {
     const userReview = async () => {
       const movieId = localStorage.getItem('@LOCALMOVIEID');
+      console.log(movieId)
       const userId = localStorage.getItem('@USERID');
+      console.log(userId)
       try {
-        const { data } = await api.get(
+        const res = await api.get(
           `/movies/${movieId}/reviews?userId=${userId}`
         );
-
-        setReviewId(data.reviews.id)
-        setReviewsNumber(data);
-        console.log('3');
+      
+        // setUserReview(data)
+        // setUserReviewId(data[0].id);
+        console.log(res)
+        console.log('certo')
       } catch (error) {
         console.log(error.message);
+        console.log('deu errado')
       }
     };
     userReview();
@@ -54,10 +59,12 @@ export const SectionUser = () => {
   // console.log(reviewsNumber)
   return (
     <>
-      {reviewsNumber.length === 0 ? (
+      <button onClick={() => setIsOpen(true)}>Avaliar</button>
+      {/* {userReview.length === 0 ? (
         <div>
           <Paragraph>Avaliações</Paragraph>
 
+    
           <button onClick={() => setIsOpen(true)}>Avaliar</button>
         </div>
       ) : (
@@ -68,7 +75,7 @@ export const SectionUser = () => {
           <button onClick={ () => setIsOpenAtt(true)}>Editar</button>
           <button onClick={ () => deleteReview()}>Excluir</button>
         </div>
-      )}
+      )} */}
     </>
   );
 };
