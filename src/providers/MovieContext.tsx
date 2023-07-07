@@ -73,7 +73,7 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
   const [allMovies, setAllmovies] = useState<IAllmovies[]>([]); // allmovies
   const [allMoviewsWithReview, setAllMoviesWithReview] = useState<IMovies[]>([]); //allmovieswithreview
   const [reviews, setReviews] = useState<IReview[]>([]);
-  const [userReview, setUserReview] = useState<IReview[] | null>(null);
+  const [userReview, setUserReview] = useState<IReview[]>([]);
   const [userReviewId, setUserReviewId] = useState<number>(0);
   const [movieWithReview, setMovieWithReview] = useState<IMovies[]>([]);
 
