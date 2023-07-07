@@ -19,7 +19,7 @@ export const ReviewContext = createContext({} as IReviewContext);
 
 export const ReviewProvider = ({ children }: ReviewProviderProps) => {
   
-const { setReviews, reviews, setUserReview, userReviewId } = useContext(MovieContext)
+const { setReviews, reviews, userReviewId } = useContext(MovieContext)
 
 const { setIsOpenAtt } = useContext(UserContext)
 
