@@ -1,5 +1,4 @@
 import { ReactNode, createContext, useEffect, useState } from 'react';
-import { IMovies } from '../Pages/HomePage/HomePage';
 import { api } from '../services/api';
 
 export const MovieContext = createContext({});
@@ -8,56 +7,103 @@ interface MovieProviderProps {
   children: ReactNode;
 }
 
+interface IAllmovies{
+  
+    id: number;
+    name: string;
+    type: string;
+    duration: number;
+    synopsis: string;
+    image: string;
+  
+}
+interface IMovies {
+  id: number;
+  name: string;
+  type: string;
+  duration: number;
+  synopsis: string;
+  image: string;
+  reviews: [
+    {
+      movieId: number;
+      userId: number;
+      score: number;
+      description: string;
+    }
+  ];
+}
+
+interface IReview {
+  
+    id: number;
+    movieId: number;
+    userId: number;
+    score: number;
+    description: string;
+
+}
+
+
 export const MovieProvider = ({ children }: MovieProviderProps) => {
   const [selectMovie, setSelectMovie] = useState<IMovies | null>(null);
   const [averageScore, setAverageScore] = useState(null);
+  const [moviesList, setMoviesList] = useState<IMovies[]>([]);
+  const [allMovies, setAllmovies] = useState<IAllmovies[]>([]);
+  const [allMoviewsWithReview, setAllMoviesWithReview] = useState<IMovies[]>([]);
+  const [movieWithReview, setMovieWithReview] = useState<IMovies[]>([]);
+  const [reviews, setReviews] = useState<IReview[]>([]);
+
+
+  const movieId = localStorage.getItem('@LOCALMOVIEID')
 
   // GET /movies
-  const renderAllMovies = async () => {
-    useEffect(() => {
-      const loadMovie = async () => {
-        try {
-          const { data } = await api.get(`/movies`);
-          setSelectMovie(data);
-        } catch (error) {
-          console.log(error.message);
-        }
-      };
-      loadMovie();
-      setSelectMovie(null);
-    }, []);
-  };
+  useEffect(() => {
+    const allMoviesFunction = async () => {
+      try {
+        const { data } = await api.get(`/movies`);
+        setAllmovies(data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    allMoviesFunction();
+  }, []);
 
   // GET /movies/?_embed=reviews
-  const renderAllMoviesWithReview = async () => {
-    useEffect(() => {
-      const loadMovie = async () => {
-        const movieId = localStorage.getItem('@LOCALMOVIEID');
-        try {
-          const { data } = await api.get(`/movies/${movieId}?_embed=reviews`);
-          setSelectMovie(data);
-        } catch (error) {
-          console.log(error.message);
-        }
-      };
-      loadMovie();
-      setSelectMovie(null);
-    }, []);
-  };
-
+  
+  useEffect(() => {
+    const allMoviesWithReviewFunction = async () => {
+      
+      try {
+        const { data } = await api.get('/movies?_embed=reviews');
+        setAllMoviesWithReview(data.reviews);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    allMoviesWithReviewFunction();
+  }, []);
+ 
   // GET /movies/:id?_embed=reviews
-  // filme específico com suas respecitvas avaliações passando o id para rota
 
-  const renderMovieWithIdRoute = async () => {
-    const reviewId = '@REVIEWID';
-    localStorage.setItem('@REVIEWID', reviewId);
+  useEffect(() => {
+    const movieWithReviewFunction = async (id) => {
+      
+      try {
+        const { data } = await api.get(`/movies/${id}?_embed=reviews`);
+        setMovieWithReview(data);
+        setReviews(data.reviews);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    movieWithReviewFunction();
+  }, []);
 
-    // COLETANDO REVIEWID
+  // USEEFFECT PARA REVIEWID
 
-    const storedReviewId = localStorage.getItem('@REVIEWID');
-    console.log(storedReviewId);
-
-    // USEEFFECT PARA REVIEWID
+  
     useEffect(() => {
       const loadMovie = async () => {
         const movieId = localStorage.getItem('@LOCALMOVIEID');
@@ -71,7 +117,7 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
       loadMovie();
       setSelectMovie(null);
     }, []);
-  };
+  
 
   //CALCULATE AVERAGE SCORE
   useEffect(() => {
@@ -107,10 +153,8 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
       value={{
         selectMovie,
         setSelectMovie,
-        renderAllMovies,
         averageScore,
         setAverageScore,
-        renderAllMoviesWithReview,
       }}
     >
       {children}
