@@ -5,12 +5,10 @@ import { MoviesCard } from '../MoviesCard/MoviesCard';
 import { StyledList, StyledListSection } from './MoviesList';
 import { MovieContext } from '../../providers/MovieContext';
 
-// interface IMoviesProps {
-//   moviesList: IMovies[];
-// }
 
 
-export const MoviesList = (/*{ moviesList }: IMoviesProps*/) => {
+
+export const MoviesList = () => {
 
   const { allMoviewsWithReview } = useContext(MovieContext)
 

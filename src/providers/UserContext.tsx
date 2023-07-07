@@ -47,15 +47,6 @@ const [isOpenAtt, setIsOpenAtt] = useState(false);
 
 const [isOpenDelete, setIsOpenDelete] = useState(false);
 
-const token = localStorage.getItem('@TOKEN')
-
-const userId = localStorage.getItem('@USERID')
-
-const header = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-};
 
 const createUser = async (formData) => {
     try {

@@ -26,22 +26,9 @@ export interface IMovies {
 }
 
 export const HomePage = () => {
-  const [moviesList, setMoviesList] = useState<IMovies[]>([]);
   
-  useEffect(() => {
-    const renderMovies = async () => {
-      try {
-        const { data } = await api.get<IMovies[]>('/movies?_embed=reviews');
-        setMoviesList(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    renderMovies();
-  }, []);
-
   
-
+  
   return (
     
     <div>
@@ -49,7 +36,7 @@ export const HomePage = () => {
       <a href="/loginPage">loginPage</a>
       <a href="/registerPage">registerPage</a>
       <Header/>
-      <MoviesList moviesList={moviesList} />
+      <MoviesList  />
       <Footer/>
     </div>
   );
