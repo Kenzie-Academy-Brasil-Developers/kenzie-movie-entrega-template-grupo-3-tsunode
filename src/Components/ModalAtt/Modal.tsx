@@ -1,7 +1,11 @@
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
 
 
-export const ModalAtt = ({setIsOpenAtt}) => {
-    return(
+export const ModalAtt = () => {
+    const {setIsOpenAtt} = useContext(UserContext)  
+  
+  return(
       <>
         <h2>Avaliação</h2>
         <form action="">

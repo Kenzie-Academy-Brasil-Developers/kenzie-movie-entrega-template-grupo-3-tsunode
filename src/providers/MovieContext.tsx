@@ -1,8 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from 'react';
 import { api } from '../services/api';
 
-export const MovieContext = createContext({});
-
 interface MovieProviderProps {
   children: ReactNode;
 }
@@ -45,17 +43,37 @@ interface IReview {
 }
 
 
+interface IMovieListContext {
+  selectMovie: IMovies | null;
+  setSelectMovie: React.Dispatch<React.SetStateAction<IMovies | null>>;
+  averageScore: null;
+  setAverageScore: React.Dispatch<React.SetStateAction<null>>;
+  moviesList: IMovies[];
+  setMoviesList: React.Dispatch<React.SetStateAction<IMovies[]>>;
+  allMovies:  IAllmovies[];
+  setAllmovies:  React.Dispatch<React.SetStateAction<IAllmovies[]>>;
+  allMoviewsWithReview: IMovies[];
+  setAllMoviesWithReview:  React.Dispatch<React.SetStateAction<IMovies[]>>;
+  movieWithReview: IMovies[]
+  setMovieWithReview: React.Dispatch<React.SetStateAction<IMovies[]>>;
+  reviews: IReview[]; 
+  setReviews:  React.Dispatch<React.SetStateAction<IReview[]>>;
+  userReview: IReview[];
+  setUserReview: React.Dispatch<React.SetStateAction<IReview[]>>;
+}
+
+export const MovieContext = createContext({} as IMovieListContext);
+
 export const MovieProvider = ({ children }: MovieProviderProps) => {
   const [selectMovie, setSelectMovie] = useState<IMovies | null>(null);
   const [averageScore, setAverageScore] = useState(null);
   const [moviesList, setMoviesList] = useState<IMovies[]>([]);
-  const [allMovies, setAllmovies] = useState<IAllmovies[]>([]);
-  const [allMoviewsWithReview, setAllMoviesWithReview] = useState<IMovies[]>([]);
-  const [movieWithReview, setMovieWithReview] = useState<IMovies[]>([]);
+  const [allMovies, setAllmovies] = useState<IAllmovies[]>([]); // allmovies
+  const [allMoviewsWithReview, setAllMoviesWithReview] = useState<IMovies[]>([]); //allmovieswithreview
+  const [movieWithReview, setMovieWithReview] = useState<IMovies[]>();
   const [reviews, setReviews] = useState<IReview[]>([]);
+  const [userReview, setUserReview] = useState<IReview[]>([]);
 
-
-  const movieId = localStorage.getItem('@LOCALMOVIEID')
 
   // GET /movies
   useEffect(() => {
@@ -77,7 +95,7 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
       
       try {
         const { data } = await api.get('/movies?_embed=reviews');
-        setAllMoviesWithReview(data.reviews);
+        setAllMoviesWithReview(data);
       } catch (error) {
         console.log(error.message);
       }
@@ -85,37 +103,20 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
     allMoviesWithReviewFunction();
   }, []);
  
-  // GET /movies/:id?_embed=reviews
 
-  useEffect(() => {
-    const movieWithReviewFunction = async (id) => {
-      
-      try {
-        const { data } = await api.get(`/movies/${id}?_embed=reviews`);
-        setMovieWithReview(data);
-        setReviews(data.reviews);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    movieWithReviewFunction();
-  }, []);
-
-  // USEEFFECT PARA REVIEWID
+  // Get /movies/:idMovie/reviews?userId=:idUser
 
   
     useEffect(() => {
-      const loadMovie = async () => {
-        const movieId = localStorage.getItem('@LOCALMOVIEID');
+      const userReviewFunction = async (userId,movieId) => {
         try {
-          const { data } = await api.get(`/movies/${movieId}?_embed=reviews`);
-          setSelectMovie(data);
+          const { data } = await api.get(`/movies/${movieId}/reviews?userId=${userId}`);
+          setUserReview(data);
         } catch (error) {
           console.log(error.message);
         }
       };
-      loadMovie();
-      setSelectMovie(null);
+      userReviewFunction();
     }, []);
   
 
@@ -155,6 +156,18 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
         setSelectMovie,
         averageScore,
         setAverageScore,
+        moviesList,
+        setMoviesList,
+        allMovies,
+        setAllmovies,
+        allMoviewsWithReview,
+        setAllMoviesWithReview,
+        movieWithReview,
+        setMovieWithReview,
+        reviews,
+        setReviews,
+        userReview,
+        setUserReview,
       }}
     >
       {children}

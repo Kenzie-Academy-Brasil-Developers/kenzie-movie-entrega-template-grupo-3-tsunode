@@ -1,15 +1,25 @@
-import { ReactNode, createContext } from "react";
+import { ReactNode, createContext, useContext } from "react";
 import { api } from "../services/api";
+import { MovieContext } from "./MovieContext";
 
-export const ReviewContext = createContext({});
+
 
 interface ReviewProviderProps {
     children: ReactNode;
 }
 
+interface IReviewContext{
+  createReview: (formData: any) => Promise<void>;
+  attReview: (formData: any, reviewId: any) => Promise<void>;
+  deleteReview: (reviewId: any) => Promise<void>
+}
+
+export const ReviewContext = createContext({} as IReviewContext);
 
 export const ReviewProvider = ({ children }: ReviewProviderProps) => {
-    
+  
+const { setReviews, reviews } = useContext(MovieContext)
+
 const localMovieId = localStorage.getItem('@LOCALMOVEID')
 
 const token = localStorage.getItem('@TOKEN')
@@ -27,7 +37,7 @@ const header = {
 
 const createReview = async (formData) => {
     try {
-        await api.post(
+        const { data } = await api.post(
           `/reviews`,
           {
             movieId: localMovieId,
@@ -37,11 +47,10 @@ const createReview = async (formData) => {
           },
           header
         );
+        setReviews(() => [...reviews, data])
         console.log('Sucesso');
       } catch (error) {
         console.log(error);
-      } finally {
-        location.reload();
       }
 };
 
@@ -82,7 +91,11 @@ const deleteReview = async (reviewId) => {
   
     return (
       <ReviewContext.Provider
-        value={{createReview}}
+        value={{
+          createReview,
+          attReview,
+          deleteReview
+        }}
       >
         {children}
       </ReviewContext.Provider>

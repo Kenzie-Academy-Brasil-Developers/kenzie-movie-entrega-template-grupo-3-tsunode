@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { Paragraph } from '../../styles/typography';
+import { UserContext } from '../../providers/UserContext';
 
-export const SectionUser = ({ setIsOpen, setIsOpenAtt }) => {
+export const SectionUser = () => {
   const [reviewsNumber, setReviewsNumber] = useState([]);
   const [reviewId , setReviewId] = useState('')
+
+  const {setIsOpen, setIsOpenAtt} = useContext(UserContext)
+
+
+
   useEffect(() => {
     const userReview = async () => {
       const movieId = localStorage.getItem('@LOCALMOVIEID');

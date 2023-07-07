@@ -1,6 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import { IMovies } from '../../Pages/HomePage/HomePage';
-import { MovieContext } from '../../providers/MovieContext';
 import { StyledUpperSection } from '../../Components/MoviesCard/MoviesCardStyle';
 import { SmallYellowButton } from '../../styles/Buttons';
 import { Paragraph, Title2 } from '../../styles/typography';
@@ -11,15 +9,16 @@ import { Modal } from '../../Components/Modal/Modal';
 import { ModalAtt } from '../../Components/ModalAtt/Modal';
 import { ReviewsCard } from '../../Components/ReviewsCard/ReviewsCard';
 import { SectionUser } from '../../Components/SectionUser/SectionUser';
+import { MovieContext } from '../../providers/MovieContext';
+import { UserContext } from '../../providers/UserContext';
 
 export const RenderPage = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenAtt, setIsOpenAtt] = useState(false);
-  const [averageScore, setAverageScore] = useState(null); //passou pro Context
-  const { setSelectMovie, selectMovie } = useContext(MovieContext) as {
-    setSelectMovie: (movie: IMovies | null) => void;
-    selectMovie: (movie: IMovies | null) => void;
-  };
+  
+  
+  const { setMovieWithReview , setReviews, movieWithReview, reviews } = useContext(MovieContext)
+
+  const { isOpen, isOpenAtt } = useContext(UserContext)
+
 
   const userId = localStorage.getItem('@USERID');
 
@@ -28,69 +27,48 @@ export const RenderPage = () => {
       const movieId = localStorage.getItem('@LOCALMOVIEID');
       try {
         const { data } = await api.get(`/movies/${movieId}?_embed=reviews`);
-        setSelectMovie(data);
+        setMovieWithReview(data);
+        setReviews(data.reviews);
+
       } catch (error) {
         console.log(error.message);
       }
     };
     loadMovie();
-    setSelectMovie(null);
+    setMovieWithReview([]);
   }, []); //passou pro Context
 
-  useEffect(() => {
-    const fetchAverageReview = async () => {
-      const movieId = localStorage.getItem('@LOCALMOVIEID');
-      try {
-        // Fetch movie details
-        const { data } = await api.get(`/movies/${movieId}?_embed=reviews`);
-        setSelectMovie(data);
+  const sum = reviews?.reduce((acc, cur) => {
+    return acc + Number(cur.score);
+  }, 0);
 
-        // Extract the score from the movie object
-        const reviews = selectMovie?.reviews.map((review) => {
-          return review.score;
-        });
+  const average = sum / reviews?.length;
 
-        //Calculate avg score
-        const sum = reviews?.reduce((acc, cur) => {
-          return acc + cur;
-        }, 0);
-
-        const average = sum / reviews?.length;
-        setAverageScore(average);
-      } catch (error) {
-        console.log(error.message);
-        setAverageScore(null);
-      }
-    };
-    fetchAverageReview();
-  }); //passou pro Context
-
-  /*  console.log(selectMovie); */
+  
+ 
   return (
     <>
-      {selectMovie == null ? (
+      {movieWithReview == null ? (
         <div>loading</div>
       ) : (
         <div>
           <Header />
-          <img src={selectMovie.image} />
+          <img src={movieWithReview.image} />
           <StyledUpperSection>
-            <SmallYellowButton buttonSize={10}>
-              {selectMovie.type}
+            <SmallYellowButton buttonsize={10}>
+              {movieWithReview.type}
             </SmallYellowButton>
-            <Paragraph>{selectMovie.duration}</Paragraph>
+            <Paragraph>{movieWithReview.duration}</Paragraph>
           </StyledUpperSection>
           <StyledUpperSection>
-            <Title2>{selectMovie.name}</Title2>
+            <Title2>{movieWithReview.name}</Title2>
             <div>
-              {averageScore !== null ? (
-                <Paragraph> Avg Score {averageScore}</Paragraph>
-              ) : (
-                <Paragraph>loading...</Paragraph>
-              )}
+              
+                <Paragraph>{average}</Paragraph>
+    
             </div>
           </StyledUpperSection>
-          <Paragraph>{selectMovie.synopsis}</Paragraph>
+          <Paragraph>{movieWithReview.synopsis}</Paragraph>
           <div>
             {userId == null ? (
               <div>
@@ -99,19 +77,19 @@ export const RenderPage = () => {
                 <button>Avaliar</button>
               </div>
             ) : (
-              <SectionUser setIsOpen={setIsOpen} />
+              <SectionUser  />
             )}
 
-            {selectMovie.reviews.map((review, index) => (
+            {reviews.map((review, index) => (
               <ReviewsCard
                 review={review}
                 index={index}
-                setIsOpenAtt={setIsOpenAtt}
+                
               />
             ))}
           </div>
-          {isOpen ? <Modal setIsOpen={setIsOpen} /> : null}
-          {isOpenAtt ? <ModalAtt setIsOpenAtt={setIsOpenAtt} /> : null}
+          {isOpen ? <Modal/> : null}
+          {isOpenAtt ? <ModalAtt /> : null}
           <Footer />
         </div>
       )}

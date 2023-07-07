@@ -6,6 +6,8 @@ import { z } from 'zod';
 import { LoginFormSchema } from './LoginFormSchema';
 import { Input } from '../Input/Input';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../providers/UserContext';
 
 export const LoginForm = () => {
   const {
@@ -16,28 +18,21 @@ export const LoginForm = () => {
     resolver: zodResolver(LoginFormSchema),
   });
 
-  const navigate = useNavigate();
 
   interface FormData extends z.infer<typeof LoginFormSchema> {
     email: string;
     password: string;
   }
 
+  
+  const { loginUser } = useContext(UserContext)
+  
+  
+  
   const submit = (formData: FormData) => {
     console.log(formData);
     loginUser(formData);
-  };
 
-  const loginUser = async (formData: FormData) => {
-    try {
-      const { data } = await api.post('/login', formData);
-      localStorage.setItem('@TOKEN', data.accessToken);
-      localStorage.setItem('@USERID', data.user.id);
-      localStorage.setItem('@USERNAME', data.user.name);
-      navigate('/');
-    } catch (error) {
-      console.log('233');
-    }
   };
 
   return (

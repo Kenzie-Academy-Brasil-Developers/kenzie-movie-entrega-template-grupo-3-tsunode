@@ -1,20 +1,47 @@
-import { ReactNode, createContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 
-export const UserContext = createContext({});
 
 
 interface UserProviderProps {
     children: ReactNode;
 }
   
+interface IUser{ 
+	email: string;
+	name: string;
+	age: number;
+	id: number;
+}
 
+interface IUserContext {
+  createUser: (formData: any) => Promise<void>;
+  loginUser: (formData: any) => Promise<void>;
+  users: IUser[];
+  setUsers: React.Dispatch<React.SetStateAction<IUser[]>>;
+  user:  IUser | undefined;
+  setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpenAtt: boolean;
+  setIsOpenAtt: React.Dispatch<React.SetStateAction<boolean>>;
+
+}
+
+
+
+export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
 
+const [users, setUsers] = useState<IUser[]>([]);
 
-const localMovieId = localStorage.getItem('@LOCALMOVEID')
+const [user, setUser] = useState<IUser>();
+
+const [isOpen, setIsOpen] = useState(false);
+
+const [isOpenAtt, setIsOpenAtt] = useState(false);
+
 
 const token = localStorage.getItem('@TOKEN')
 
@@ -45,7 +72,7 @@ const loginUser = async (formData) => {
       localStorage.setItem('@TOKEN', data.accessToken);
       localStorage.setItem('@USERID', data.user.id);
       localStorage.setItem('@USERNAME', data.user.name);
-      navigate('/')
+      console.log('sucesso')
     } catch (error) {
       console.log(error);
     }
@@ -55,6 +82,7 @@ const loginUser = async (formData) => {
     const getUsers = async () => {
       try {
         const { data } = await api.get(`/users`);
+        setUsers(data);
       } catch (error) {
         console.log(error.message);
       }
@@ -69,6 +97,7 @@ const loginUser = async (formData) => {
         const getUserUnique = async () => {
             try {
               const { data } = await api.get(`/users/${userId}`);
+              setUser(data)
               console.log('achou o usuário')
             } catch (error) {
               console.log(error.message);
@@ -79,14 +108,22 @@ const loginUser = async (formData) => {
     
   }, []);
     
-    
-
-
   
 
     return (
       <UserContext.Provider
-        value={''}
+        value={{
+          createUser,
+          loginUser,
+          users,
+          setUsers,
+          user,
+          setUser,
+          isOpen,
+          setIsOpen,
+          isOpenAtt,
+          setIsOpenAtt
+        }}
       >
         {children}
       </UserContext.Provider>

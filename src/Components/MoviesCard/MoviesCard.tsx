@@ -11,6 +11,12 @@ interface IMoviesCardProps {
 export const MoviesCard = ({ movie }: IMoviesCardProps) => {
   const navigate = useNavigate();
 
+  const sum = movie.reviews?.reduce((acc, cur) => {
+    return acc + Number(cur.score);
+  }, 0);
+
+  const average = sum / movie.reviews?.length;
+
   return (
     <StyledItem>
       <img
@@ -21,12 +27,12 @@ export const MoviesCard = ({ movie }: IMoviesCardProps) => {
         src={movie.image}
       />
       <StyledUpperSection>
-        <SmallYellowButton buttonSize={10}>{movie.type}</SmallYellowButton>
+        <SmallYellowButton buttonsize={10}>{movie.type}</SmallYellowButton>
         <Paragraph>{movie.duration}m</Paragraph>
       </StyledUpperSection>
       <StyledUpperSection>
         <Title2>{movie.name}</Title2>
-        <Paragraph>colocar o score</Paragraph>
+        <Paragraph>{average}</Paragraph>
       </StyledUpperSection>
     </StyledItem>
   );

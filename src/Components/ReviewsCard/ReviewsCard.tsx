@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Paragraph } from '../../styles/typography';
 import { api } from '../../services/api';
+import { UserContext } from '../../providers/UserContext';
 
-export const ReviewsCard = ({ review, index, setIsOpenAtt }) => {
+export const ReviewsCard = ({ review, index }) => {
   const [user, setUser] = useState('');
+
+  const { setIsOpenAtt } = useContext(UserContext)
 
   useEffect(() => {
     const getUserName = async () => {

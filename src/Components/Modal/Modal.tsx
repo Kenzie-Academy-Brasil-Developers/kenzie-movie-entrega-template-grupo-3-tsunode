@@ -1,9 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../providers/UserContext';
+import { ReviewContext } from '../../providers/ReviewContext';
 
-export const Modal = ({ setIsOpen }) => {
+export const Modal = () => {
+  
+  const {setIsOpen} = useContext(UserContext)
+  
   const { register, handleSubmit } = useForm<FormData>({});
 
   const token = localStorage.getItem('@TOKEN');
@@ -21,39 +26,40 @@ export const Modal = ({ setIsOpen }) => {
     description: string;
   }
 
-  const createReview = async (formData: FormData) => {
-    console.log(formData);
-    if (userId == null) {
-      alert('Cadastre-se');
-    } else {
-      try {
-        console.log(`${token}`);
-        await api.post(
-          `/reviews`,
-          {
-            movieId: localMovieId,
-            userId: userId,
-            description: formData.description,
-            score: Number(formData.score),
-          },
-          header
-        );
-        console.log('Sucesso');
-        toast.success('Usuário cadastrado com sucesso');
-      } catch (error) {
-        console.log(error);
-        toast.error('Erro ao cadastrar usuário');
-      } finally {
-        location.reload();
-      }
-    }
-  };
+  // const createReview = async (formData: FormData) => {
+  //   console.log(formData);
+  //   if (userId == null) {
+  //     alert('Cadastre-se');
+  //   } else {
+  //     try {
+  //       console.log(`${token}`);
+  //       await api.post(
+  //         `/reviews`,
+  //         {
+  //           movieId: localMovieId,
+  //           userId: userId,
+  //           description: formData.description,
+  //           score: Number(formData.score),
+  //         },
+  //         header
+  //       );
+  //       console.log('Sucesso');
+  //       toast.success('Usuário cadastrado com sucesso');
+  //     } catch (error) {
+  //       console.log(error);
+  //       toast.error('Erro ao cadastrar usuário');
+  //     } finally {
+  //       location.reload();
+  //     }
+  //   }
+  // };
+
+  const { createReview } = useContext(ReviewContext)
 
   const submit = (formData: FormData) => {
     console.log(formData);
     console.log(`esse é o token ${token}`);
     createReview(formData);
-    /* location.reload(); */
   };
 
   return (
