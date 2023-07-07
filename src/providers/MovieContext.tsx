@@ -12,7 +12,6 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
   const [selectMovie, setSelectMovie] = useState<IMovies | null>(null);
   const [averageScore, setAverageScore] = useState(null);
 
-
   // GET /movies
   const renderAllMovies = async () => {
     useEffect(() => {
@@ -46,9 +45,19 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
     }, []);
   };
 
-  // GET /movies/:id?_embed=reviews 
+  // GET /movies/:id?_embed=reviews
   // filme específico com suas respecitvas avaliações passando o id para rota
+
   const renderMovieWithIdRoute = async () => {
+    const reviewId = '@REVIEWID';
+    localStorage.setItem('@REVIEWID', reviewId);
+
+    // COLETANDO REVIEWID
+
+    const storedReviewId = localStorage.getItem('@REVIEWID');
+    console.log(storedReviewId);
+
+    // USEEFFECT PARA REVIEWID
     useEffect(() => {
       const loadMovie = async () => {
         const movieId = localStorage.getItem('@LOCALMOVIEID');
@@ -64,7 +73,7 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
     }, []);
   };
 
-  //CALCULATE AVERAGE SCORE 
+  //CALCULATE AVERAGE SCORE
   useEffect(() => {
     const fetchAverageReview = async () => {
       const movieId = localStorage.getItem('@LOCALMOVIEID');
