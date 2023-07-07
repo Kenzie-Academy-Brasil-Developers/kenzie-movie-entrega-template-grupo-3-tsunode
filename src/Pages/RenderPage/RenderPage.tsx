@@ -11,13 +11,14 @@ import { ReviewsCard } from '../../Components/ReviewsCard/ReviewsCard';
 import { SectionUser } from '../../Components/SectionUser/SectionUser';
 import { MovieContext } from '../../providers/MovieContext';
 import { UserContext } from '../../providers/UserContext';
+import { ModalDelete } from '../../Components/ModalDelete/Modal';
 
 export const RenderPage = () => {
   
   
   const { setMovieWithReview , setReviews, movieWithReview, reviews } = useContext(MovieContext)
 
-  const { isOpen, isOpenAtt } = useContext(UserContext)
+  const { isOpen, isOpenAtt, isOpenDelete } = useContext(UserContext)
 
 
   const userId = localStorage.getItem('@USERID');
@@ -90,6 +91,8 @@ export const RenderPage = () => {
           </div>
           {isOpen ? <Modal/> : null}
           {isOpenAtt ? <ModalAtt /> : null}
+          {isOpenDelete ? <ModalDelete/> : null}
+          <button onClick={() => {console.log(reviews)}}>ver reviews</button>
           <Footer />
         </div>
       )}

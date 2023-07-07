@@ -26,6 +26,8 @@ interface IUserContext {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isOpenAtt: boolean;
   setIsOpenAtt: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpenDelete: boolean;
+  setIsOpenDelete: React.Dispatch<React.SetStateAction<boolean>>;
 
 }
 
@@ -42,6 +44,8 @@ const [user, setUser] = useState<IUser>();
 const [isOpen, setIsOpen] = useState(false);
 
 const [isOpenAtt, setIsOpenAtt] = useState(false);
+
+const [isOpenDelete, setIsOpenDelete] = useState(false);
 
 const token = localStorage.getItem('@TOKEN')
 
@@ -88,25 +92,6 @@ const loginUser = async (formData) => {
     getUsers();
   }, []);
 
-  // useEffect(() => {
-  //   if(userId == null){
-  //       console.log('sem usuario logado')
-  //   }else{
-  //       const getUserUnique = async () => {
-  //           try {
-  //             const { data } = await api.get(`/users/${userId}`);
-  //             setUser(data)
-  //             console.log('achou o usuário')
-  //           } catch (error) {
-  //             console.log(error.message);
-  //           }
-  //         };
-  //       getUserUnique();
-  //   }
-    
-  // }, []);
-    
-  
 
     return (
       <UserContext.Provider
@@ -120,7 +105,9 @@ const loginUser = async (formData) => {
           isOpen,
           setIsOpen,
           isOpenAtt,
-          setIsOpenAtt
+          setIsOpenAtt,
+          isOpenDelete,
+          setIsOpenDelete
         }}
       >
         {children}

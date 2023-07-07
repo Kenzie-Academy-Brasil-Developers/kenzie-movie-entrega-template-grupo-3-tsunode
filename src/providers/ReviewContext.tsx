@@ -12,7 +12,7 @@ interface ReviewProviderProps {
 interface IReviewContext{
   createReview: (formData: any) => Promise<void>;
   attReview: (formData: any) => Promise<void>;
-  deleteReview: (reviewId: any) => Promise<void>;
+  deleteReview:  () => Promise<void>;
 }
 
 export const ReviewContext = createContext({} as IReviewContext);
@@ -76,26 +76,23 @@ const attReview = async (formData) => {
         const reviewsAtualizado = reviews.find((item) => item.id == userReviewId)
         reviewsAtualizado.score = formData.score
         reviewsAtualizado.description = formData.description
-        console.log(reviewsAtualizado)
-        console.log('sucesso')
         setReviews(() => [...reviews])
         setIsOpenAtt(false)
       } catch (error) {
         console.log(error);
-        console.log('erro')
       }
 };
 
-const deleteReview = async (reviewId) => {
+const deleteReview = async () => {
     try {
         await api.delete(
-          `/reviews/${reviewId}`,
+          `/reviews/${userReviewId}`,
           header
         );
       } catch (error) {
         console.log(error);
-      } finally {
-        location.reload();
+      }finally{
+        window.location.reload()
       }
 }
   

@@ -6,7 +6,7 @@ import { MovieContext } from '../../providers/MovieContext';
 
 export const SectionUser = () => {
 
-  const {setIsOpen, setIsOpenAtt} = useContext(UserContext)
+  const {setIsOpen, setIsOpenAtt, setIsOpenDelete} = useContext(UserContext)
 
   const { setUserReview, userReview, userReviewId, setUserReviewId} = useContext(MovieContext)
 
@@ -37,18 +37,6 @@ export const SectionUser = () => {
     },
   };
 
-  const deleteReview = async () => {
-    const userId = localStorage.getItem('@USERID');
-    try {
-      const { data } = await api.delete(
-        `/reviews/${userId}`, header
-      );
-      console.log('excluido com sucesso')
-    } catch (error) {
-      console.log(error);
-    }
-  };
- 
   return (
     <>
       {userReview == undefined  ? (
@@ -64,7 +52,7 @@ export const SectionUser = () => {
           <p>{userReview.description}</p>
           <p>{userReview.score}</p>
           <button onClick={ () => setIsOpenAtt(true)}>Editar</button>
-          <button onClick={ () => deleteReview()}>Excluir</button>
+          <button onClick={ () => setIsOpenDelete(true) }>Excluir</button>
         </div>
       )}
     </>
