@@ -1,17 +1,25 @@
-import { Footer } from '../../Components/Footer/Foot';
-// import { LoginForm } from "../../Components/LoginForm";
+import { Footer } from "../../Components/Footer/Foot";
 import {
   LoginLowerSection,
   StyledLoginForm,
   StyledLoginSection,
-} from './LoginStyle';
-import { StyledInput } from '../../styles/Inputs';
-import { Paragraph, RegisterLink, Title1 } from '../../styles/typography';
-import { MediumYellowButton } from '../../styles/Buttons';
-import { LoginForm } from '../../Components/LoginForm/LoginForm';
-import { Header } from '../../Components/Header/Header';
+} from "./LoginStyle";
+import { StyledInput } from "../../styles/Inputs";
+import { Paragraph, RegisterLink, Title1 } from "../../styles/typography";
+import { MediumYellowButton } from "../../styles/Buttons";
+import { LoginForm } from "../../Components/LoginForm/LoginForm";
+import { Header } from "../../Components/Header/Header";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../routes/Auth";
+import { RenderPage } from "../RenderPage/RenderPage";
 
 export const LoginPage = () => {
+  const { isAuthenticated } = useAuth();
+
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <>
       <Header />
