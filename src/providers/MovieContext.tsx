@@ -51,12 +51,12 @@ interface IMovieListContext {
   setAllMoviesWithReview: React.Dispatch<React.SetStateAction<IMovies[]>>;
   reviews: IReview[];
   setReviews: React.Dispatch<React.SetStateAction<IReview[]>>;
-  userReview: IReview;
-  setUserReview: React.Dispatch<React.SetStateAction<IReview>>;
+  userReview: IReview | null;
+  setUserReview:  React.Dispatch<React.SetStateAction<IReview | null>>;
   userReviewId: number;
   setUserReviewId: React.Dispatch<React.SetStateAction<number>>;
-  movieWithReview: IMovies;
-  setMovieWithReview: React.Dispatch<React.SetStateAction<IMovies>>;
+  movieWithReview:  IMovies | null;
+  setMovieWithReview:  React.Dispatch<React.SetStateAction<IMovies | null>>;
 }
 
 export const MovieContext = createContext({} as IMovieListContext);
@@ -70,9 +70,9 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
     []
   ); //allmovieswithreview
   const [reviews, setReviews] = useState<IReview[]>([]);
-  const [userReview, setUserReview] = useState<IReview[]>([]);
+  const [userReview, setUserReview] = useState<IReview | null>(null);
   const [userReviewId, setUserReviewId] = useState<number>(0);
-  const [movieWithReview, setMovieWithReview] = useState<IMovies[]>([]);
+  const [movieWithReview, setMovieWithReview] = useState<IMovies | null>(null);
 
   // GET /movies
   useEffect(() => {
