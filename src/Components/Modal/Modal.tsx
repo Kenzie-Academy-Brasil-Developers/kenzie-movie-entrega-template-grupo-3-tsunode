@@ -11,7 +11,7 @@ import { SmallYellowButton } from "../../styles/Buttons";
 export const Modal = () => {
   const { setIsOpen } = useContext(UserContext);
   const { register, handleSubmit } = useForm<FormData>({});
-  const modalClose = useRef(null);
+  const modalClose = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     const ClickOut = (e: any) => {

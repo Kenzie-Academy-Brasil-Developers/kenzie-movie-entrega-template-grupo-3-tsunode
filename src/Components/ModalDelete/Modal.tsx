@@ -14,7 +14,7 @@ export const ModalDelete = () => {
 
   const { handleSubmit } = useForm<FormData>({});
 
-  const modalClose = useRef(null);
+  const modalClose = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     const ClickOut = (e: any) => {

@@ -14,7 +14,7 @@ export const ModalAtt = () => {
   const { setIsOpenAtt } = useContext(UserContext);
   const { attReview } = useContext(ReviewContext);
 
-  const modalClose = useRef(null);
+  const modalClose = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     const ClickOut = (e: any) => {
