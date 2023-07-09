@@ -1,7 +1,7 @@
 import { IMovies } from '../../Pages/HomePage/HomePage';
 import { StyledItem, StyledStarSec, StyledUpperSection } from './MoviesCardStyle';
 import { SmallYellowButton } from '../../styles/Buttons';
-import { Paragraph, Title2 } from '../../styles/Typography';
+import { Paragraph, Title2 } from '../../styles/typography';
 import { useNavigate } from 'react-router-dom';
 import { star } from '../../assets/star';
 

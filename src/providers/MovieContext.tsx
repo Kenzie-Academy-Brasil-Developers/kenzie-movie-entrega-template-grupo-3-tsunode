@@ -80,7 +80,7 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
       try {
         const { data } = await api.get(`/movies`);
         setAllmovies(data);
-      } catch (error) {
+      } catch (error: any) {
         console.log(error.message);
       }
     };
@@ -94,7 +94,7 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
       try {
         const { data } = await api.get('/movies?_embed=reviews');
         setAllMoviesWithReview(data);
-      } catch (error) {
+      } catch (error: any) {
         console.log(error.message);
       }
     };

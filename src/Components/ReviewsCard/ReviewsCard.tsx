@@ -1,15 +1,12 @@
-import { useContext, useEffect, useState } from 'react';
-import { HighlightedLetter, Paragraph, StarAvg, Title2 } from '../../styles/Typography';
+import {  useEffect, useState } from 'react';
+import { HighlightedLetter, Paragraph, StarAvg, Title2 } from '../../styles/typography';
 import { api } from '../../services/api';
-import { UserContext } from '../../providers/UserContext';
 import { ReviewArea, StyledItem } from './StyleReview';
 import { StyledStarSec } from '../MoviesCard/MoviesCardStyle';
 import { star } from '../../assets/star';
 
 export const ReviewsCard = ({ review, index }: any) => {
   const [user, setUser] = useState('');
-
-  const { setIsOpenAtt } = useContext(UserContext);
 
   useEffect(() => {
     const getUserName = async () => {
@@ -24,7 +21,7 @@ export const ReviewsCard = ({ review, index }: any) => {
   }, []);
 
   return (
-    <StyledItem key={index} setIsOpenAtt={setIsOpenAtt}>
+    <StyledItem key={index}>
       <HighlightedLetter>{user[0]}</HighlightedLetter>
       <StyledStarSec>
       {star()}

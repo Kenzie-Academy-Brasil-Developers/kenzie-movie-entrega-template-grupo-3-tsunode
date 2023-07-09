@@ -9,7 +9,7 @@ import {
   StyledRegisterForm,
   StyledTitleSection,
 } from "./RegisterStyle";
-import { Paragraph, RegisterLink, Title1 } from "../../styles/Typography";
+import { Paragraph, RegisterLink, Title1 } from "../../styles/typography";
 import { z } from "zod";
 import { useContext } from "react";
 import { UserContext } from "../../providers/UserContext";

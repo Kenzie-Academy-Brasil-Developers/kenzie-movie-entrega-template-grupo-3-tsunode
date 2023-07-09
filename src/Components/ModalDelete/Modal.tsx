@@ -4,7 +4,7 @@ import { ReviewContext } from "../../providers/ReviewContext";
 import { useForm } from "react-hook-form";
 import { StyledModalOverlay } from "../../styles/Overlay";
 import { StyledModalForm } from "../Modal/ModalStyle";
-import { Title2 } from "../../styles/Typography";
+import { Title2 } from "../../styles/typography";
 import { SmallYellowButton } from "../../styles/Buttons";
 
 export const ModalDelete = () => {

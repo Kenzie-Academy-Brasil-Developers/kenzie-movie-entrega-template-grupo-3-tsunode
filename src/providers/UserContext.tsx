@@ -1,12 +1,10 @@
 import {
   ReactNode,
   createContext,
-  useContext,
   useEffect,
   useState,
 } from 'react';
 import { api } from '../services/api';
-import { MovieContext } from './MovieContext';
 import { useNavigate } from 'react-router-dom';
 
 interface UserProviderProps {
@@ -52,9 +50,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
 
 
-  const createUser = async (formData) => {
+  const createUser = async (formData: any) => {
     try {
-      const { data } = await api.post('/users', {
+        await api.post('/users', {
         email: formData.email,
         password: formData.password,
         name: formData.name,
@@ -65,7 +63,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
   };
 
-  const loginUser = async (formData) => {
+  const loginUser = async (formData: any) => {
     try {
       const { data } = await api.post('/login', formData);
       localStorage.setItem('@TOKEN', data.accessToken);
@@ -82,7 +80,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       try {
         const { data } = await api.get(`/users`);
         setUsers(data);
-      } catch (error) {
+      } catch (error: any) {
         console.log(error.message);
       }
     };

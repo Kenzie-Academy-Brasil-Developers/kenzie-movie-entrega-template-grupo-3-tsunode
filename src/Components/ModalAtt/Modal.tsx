@@ -1,11 +1,10 @@
 import { useContext, useEffect, useRef } from "react";
 import { UserContext } from "../../providers/UserContext";
-import { MovieContext } from "../../providers/MovieContext";
 import { ReviewContext } from "../../providers/ReviewContext";
 import { useForm } from "react-hook-form";
 import { StyledModalOverlay } from "../../styles/Overlay";
 import { CloseModal, StyledModalForm, StyledModalTitle } from "../Modal/ModalStyle";
-import { Title2 } from "../../styles/Typography";
+import { Title2 } from "../../styles/typography";
 import { StyledSelect, StyledTextArea } from "../../styles/Inputs";
 import { SmallYellowButton } from "../../styles/Buttons";
 
@@ -13,7 +12,6 @@ export const ModalAtt = () => {
   const { register, handleSubmit } = useForm<FormData>({});
 
   const { setIsOpenAtt } = useContext(UserContext);
-  const { userReviewId } = useContext(MovieContext);
   const { attReview } = useContext(ReviewContext);
 
   const modalClose = useRef(null);

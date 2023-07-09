@@ -1,6 +1,3 @@
-import { useEffect, useState } from 'react';
-
-import { api } from '../../services/api';
 
 import { MoviesList } from '../../Components/MoviesList/MoviesList.tsx';
 import { Header } from '../../Components/Header/Header.tsx';

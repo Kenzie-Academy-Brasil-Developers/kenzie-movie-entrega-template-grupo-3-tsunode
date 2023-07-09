@@ -17,9 +17,8 @@ import {
 import {
   Paragraph,
   RegisterLink,
-  Title1,
-  Title2,
-} from "../../styles/Typography";
+  Title1
+} from "../../styles/typography";
 import { MediumYellowButton } from "../../styles/Buttons";
 
 export const LoginForm = () => {

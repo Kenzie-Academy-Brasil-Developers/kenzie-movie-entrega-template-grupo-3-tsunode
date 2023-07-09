@@ -1,16 +1,14 @@
 import { useContext, useEffect } from "react";
 import {
-  StyledStarSec,
-  StyledUpperSection,
+  StyledStarSec
 } from "../../Components/MoviesCard/MoviesCardStyle";
 import { MediumYellowButton, SmallYellowButton } from "../../styles/Buttons";
 import {
   Paragraph,
   StarAvg,
   Title1,
-  Title1MobileB,
   Title2,
-} from "../../styles/Typography";
+} from "../../styles/typography";
 import { api } from "../../services/api";
 import { Header } from "../../Components/Header/Header";
 import { Footer } from "../../Components/Footer/Foot";
@@ -56,7 +54,7 @@ export const RenderPage = () => {
       }
     };
     loadMovie();
-    setMovieWithReview([]);
+    setMovieWithReview([] as any);
   }, []); //passou pro Context
 
   const sum = reviews?.reduce((acc, cur) => {

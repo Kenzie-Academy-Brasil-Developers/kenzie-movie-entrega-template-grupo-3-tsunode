@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { api } from "../../services/api";
-import { Paragraph, StarAvg, Title1 } from "../../styles/Typography";
+import { Paragraph, StarAvg, Title1 } from "../../styles/typography";
 import { UserContext } from "../../providers/UserContext";
 import { MovieContext } from "../../providers/MovieContext";
 import { StyledAvaliationSec } from "../../Pages/RenderPage/RenderStyle";
@@ -15,12 +15,11 @@ import {
 } from "./StyleSection";
 import { Trash } from "../../assets/trash";
 import { star } from "../../assets/star";
-import { StyledList } from "../MoviesList/MoviesList";
 
 export const SectionUser = () => {
   const { setIsOpen, setIsOpenAtt, setIsOpenDelete } = useContext(UserContext);
 
-  const { setUserReview, userReview, userReviewId, setUserReviewId } =
+  const { setUserReview, userReview, setUserReviewId } =
     useContext(MovieContext);
 
   useEffect(() => {
@@ -42,13 +41,6 @@ export const SectionUser = () => {
       userReviewFunction();
     }
   }, []);
-
-  const token = localStorage.getItem("@TOKEN");
-  const header = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
 
   return (
     <>

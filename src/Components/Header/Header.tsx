@@ -1,13 +1,12 @@
 import logo from '../../assets/logo.svg';
 import { useNavigate } from 'react-router-dom';
 import { HeaderLetter, InnerHeaderDiv, LogoutButton, OuterHeaderDiv, StyledHeadSection, StyledHeader } from './styles';
-import { HeaderCap, Paragraph } from '../../styles/Typography';
+import { HeaderCap, Paragraph } from '../../styles/typography';
 import { SmallYellowButton } from '../../styles/Buttons';
 
 
 
 export const Header = () => {
-  const token = localStorage.getItem('@TOKEN');
 
   const name = localStorage.getItem('@USERNAME');
 
@@ -15,7 +14,7 @@ export const Header = () => {
 
   return (
     <>
-      {token == null ? (
+      {name == null ? (
         <StyledHeader>
           <img src={logo} alt="" />
           <StyledHeadSection>

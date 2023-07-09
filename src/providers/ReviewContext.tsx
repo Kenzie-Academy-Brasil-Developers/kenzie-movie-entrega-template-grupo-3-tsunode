@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useEffect } from 'react';
+import { ReactNode, createContext, useContext } from 'react';
 import { api } from '../services/api';
 import { MovieContext } from './MovieContext';
 import { UserContext } from './UserContext';
@@ -32,7 +32,7 @@ export const ReviewProvider = ({ children }: ReviewProviderProps) => {
     },
   };
 
-  const createReview = async (formData) => {
+  const createReview = async (formData:any) => {
     try {
       const { data } = await api.post(
         `/reviews`,
@@ -52,7 +52,7 @@ export const ReviewProvider = ({ children }: ReviewProviderProps) => {
     }
   };
 
-  const attReview = async (formData) => {
+  const attReview = async (formData:any) => {
     try {
       await api.put(
         `/reviews/${userReviewId}`,
@@ -65,8 +65,8 @@ export const ReviewProvider = ({ children }: ReviewProviderProps) => {
         header
       );
       const reviewsAtualizado = reviews.find((item) => item.id == userReviewId);
-      reviewsAtualizado.score = formData.score;
-      reviewsAtualizado.description = formData.description;
+      reviewsAtualizado!.score = formData.score;
+      reviewsAtualizado!.description = formData.description;
       setReviews(() => [...reviews]);
       setIsOpenAtt(false);
     } catch (error) {

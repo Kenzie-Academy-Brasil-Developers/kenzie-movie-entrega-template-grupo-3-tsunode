@@ -4,7 +4,7 @@ import { UserContext } from "../../providers/UserContext";
 import { ReviewContext } from "../../providers/ReviewContext";
 import { StyledModalOverlay } from "../../styles/Overlay";
 import { CloseModal, StyledModalForm, StyledModalTitle } from "./ModalStyle";
-import { Title2 } from "../../styles/Typography";
+import { Title2 } from "../../styles/typography";
 import { StyledSelect, StyledTextArea } from "../../styles/Inputs";
 import { SmallYellowButton } from "../../styles/Buttons";
 
