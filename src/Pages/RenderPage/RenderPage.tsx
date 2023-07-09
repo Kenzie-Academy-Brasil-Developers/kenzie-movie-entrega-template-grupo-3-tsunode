@@ -31,6 +31,7 @@ import { BlackStar } from "../../assets/starBlack";
 import { Modal } from "../../Components/Modal/Modal";
 import { LogoutButton } from "../../Components/Header/styles";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"
 
 export const RenderPage = () => {
   const { setMovieWithReview, setReviews, movieWithReview, reviews } =
@@ -62,6 +63,8 @@ export const RenderPage = () => {
   }, 0);
 
   const average = (sum / reviews?.length).toFixed(1);
+
+  const notify = (message: any) => toast(message)
 
   return (
     <>
@@ -101,7 +104,7 @@ export const RenderPage = () => {
                   <MediumYellowButton
                     buttonsize={12}
                     onClick={() => {
-                      alert("Esteja logado para poder avaliar");
+                      notify("Esteja logado para poder avaliar");
                     }}
                   >
                     {BlackStar()}

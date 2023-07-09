@@ -6,6 +6,7 @@ import {
 } from 'react';
 import { api } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify"
 
 interface UserProviderProps {
   children: ReactNode;
@@ -48,6 +49,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   const navigate = useNavigate()
 
+  const notify = (message: any) => toast(message) 
 
 
   const createUser = async (formData: any) => {
@@ -57,8 +59,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         password: formData.password,
         name: formData.name,
       });
+      notify('Usuário criado com sucesso')
       navigate('/loginPage')
     } catch (error) {
+      notify('Algo deu errado')
       console.log(error);
     }
   };
@@ -69,8 +73,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       localStorage.setItem('@TOKEN', data.accessToken);
       localStorage.setItem('@USERID', data.user.id);
       localStorage.setItem('@USERNAME', data.user.name);
+      notify('Usuário logado com sucesso')
       navigate('/')
     } catch (error) {
+      notify('Email ou senha incorretos')
       console.log(error);
     }
   };

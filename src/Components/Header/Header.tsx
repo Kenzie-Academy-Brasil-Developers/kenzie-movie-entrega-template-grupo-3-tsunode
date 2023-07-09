@@ -10,13 +10,14 @@ export const Header = () => {
 
   const name = localStorage.getItem('@USERNAME');
 
+
   const navigate = useNavigate();
 
   return (
     <>
       {name == null ? (
         <StyledHeader>
-          <img src={logo} alt="" />
+          <img src={logo} alt=""/>
           <StyledHeadSection>
             <HeaderCap onClick={() => navigate('/registerPage')}>Cadastre-se</HeaderCap>
             <SmallYellowButton buttonsize={8} onClick={() => navigate('/loginPage')}>Entrar</SmallYellowButton>
