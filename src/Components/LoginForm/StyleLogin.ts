@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
+import LoginImage from "../../assets/LoginPage.svg"
+
 export const StyledLoginSection = styled.section`
-  background-image: url("../../../src/assets/Rectangle 13.svg");
+  background-image: url(${LoginImage});
   background-size: cover;
   height: 82vh;
   margin-bottom: -2rem;

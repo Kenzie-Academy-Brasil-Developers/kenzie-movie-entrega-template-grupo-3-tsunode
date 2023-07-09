@@ -38,7 +38,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <StyledLoginSection>
+    <StyledLoginSection className="">
       <Header />
       <StyledLoginForm onSubmit={handleSubmit(submit)}>
         <Title1>Login</Title1>
