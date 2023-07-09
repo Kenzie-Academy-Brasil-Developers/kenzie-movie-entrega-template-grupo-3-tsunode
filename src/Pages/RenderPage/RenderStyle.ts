@@ -30,7 +30,7 @@ export const StyledMovieDiv = styled.div`
 `;
 export const StyledMovieText = styled.div`
   padding: 2rem 14vw;
-`
+`;
 export const StyledAvaliationSec = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -45,13 +45,11 @@ export const StyledAvaliationSec = styled.div`
     text-align: center;
     gap: 1rem;
   }
-
-`
+`;
 export const AvaliationList = styled.ul`
   padding: 2rem 14vw;
   display: flex;
   flex-wrap: wrap;
   gap: 2rem 6rem;
   justify-content: center;
-
-`
+`;

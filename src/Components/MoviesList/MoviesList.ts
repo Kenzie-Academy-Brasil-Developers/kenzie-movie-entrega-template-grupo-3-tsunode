@@ -20,7 +20,6 @@ export const StyledList = styled.ul`
     width: clamp(2rem, 80vw, 23rem);
     @media screen and (max-width: 1173px) {
       width: 80vw;
-
     }
   }
 `;

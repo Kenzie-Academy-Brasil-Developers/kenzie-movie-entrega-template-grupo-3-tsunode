@@ -1,7 +1,7 @@
-import { useContext } from 'react';
-import { MoviesCard } from '../MoviesCard/MoviesCard';
-import { StyledList, StyledListSection } from './MoviesList';
-import { MovieContext } from '../../providers/MovieContext';
+import { useContext } from "react";
+import { MoviesCard } from "../MoviesCard/MoviesCard";
+import { StyledList, StyledListSection } from "./MoviesList";
+import { MovieContext } from "../../providers/MovieContext";
 
 export const MoviesList = () => {
   const { allMoviewsWithReview } = useContext(MovieContext);

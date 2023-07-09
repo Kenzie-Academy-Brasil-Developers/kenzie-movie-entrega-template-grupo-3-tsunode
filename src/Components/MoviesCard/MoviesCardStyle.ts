@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { styled } from "styled-components";
 
 export const StyledItem = styled.li`
   display: flex;
@@ -11,7 +11,6 @@ export const StyledItem = styled.li`
     @media screen and (max-width: 1173px) {
       border-radius: 4rem;
     }
-    
   }
   @media screen and (max-width: 507px) {
     h3 {
@@ -37,4 +36,4 @@ export const StyledStarSec = styled.div`
   display: flex;
   align-items: center;
   gap: 0.6rem;
-`
+`;

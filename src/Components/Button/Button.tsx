@@ -1,4 +1,4 @@
-import { MediumYellowButton } from '../../styles/Buttons';
+import { MediumYellowButton } from "../../styles/Buttons";
 
 interface ButtonProps {
   title: string;

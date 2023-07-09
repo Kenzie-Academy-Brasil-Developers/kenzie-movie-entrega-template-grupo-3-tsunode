@@ -47,7 +47,7 @@ export const Modal = () => {
 
   const submit = (formData: FormData) => {
     createReview(formData);
-    console.log(formData)
+    console.log(formData);
   };
 
   return (
@@ -58,7 +58,7 @@ export const Modal = () => {
           <CloseModal onClick={() => setIsOpen(false)}>X</CloseModal>
         </StyledModalTitle>
         <StyledSelect id="" {...register("score")} required>
-           <option value="">Selecionar nota</option>
+          <option value="">Selecionar nota</option>
           <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -79,10 +79,7 @@ export const Modal = () => {
           required
         ></StyledTextArea>
         <div>
-          <SmallYellowButton
-            type="submit"
-            buttonsize={12}
-          >
+          <SmallYellowButton type="submit" buttonsize={12}>
             Cadastrar avaliação
           </SmallYellowButton>
         </div>

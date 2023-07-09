@@ -1,15 +1,18 @@
-import logo from '../../assets/logo.svg';
-import { useNavigate } from 'react-router-dom';
-import { HeaderLetter, InnerHeaderDiv, LogoutButton, OuterHeaderDiv, StyledHeadSection, StyledHeader } from './styles';
-import { HeaderCap, Paragraph } from '../../styles/typography';
-import { SmallYellowButton } from '../../styles/Buttons';
-
-
+import logo from "../../assets/logo.svg";
+import { useNavigate } from "react-router-dom";
+import {
+  HeaderLetter,
+  InnerHeaderDiv,
+  LogoutButton,
+  OuterHeaderDiv,
+  StyledHeadSection,
+  StyledHeader,
+} from "./styles";
+import { HeaderCap, Paragraph } from "../../styles/typography";
+import { SmallYellowButton } from "../../styles/Buttons";
 
 export const Header = () => {
-
-  const name = localStorage.getItem('@USERNAME');
-
+  const name = localStorage.getItem("@USERNAME");
 
   const navigate = useNavigate();
 
@@ -17,10 +20,17 @@ export const Header = () => {
     <>
       {name == null ? (
         <StyledHeader>
-          <img src={logo} alt=""/>
+          <img src={logo} alt="" />
           <StyledHeadSection>
-            <HeaderCap onClick={() => navigate('/registerPage')}>Cadastre-se</HeaderCap>
-            <SmallYellowButton buttonsize={8} onClick={() => navigate('/loginPage')}>Entrar</SmallYellowButton>
+            <HeaderCap onClick={() => navigate("/registerPage")}>
+              Cadastre-se
+            </HeaderCap>
+            <SmallYellowButton
+              buttonsize={8}
+              onClick={() => navigate("/loginPage")}
+            >
+              Entrar
+            </SmallYellowButton>
           </StyledHeadSection>
         </StyledHeader>
       ) : (
@@ -33,7 +43,7 @@ export const Header = () => {
             </InnerHeaderDiv>
             <LogoutButton
               onClick={() => {
-                localStorage.clear(), navigate('/');
+                localStorage.clear(), navigate("/");
               }}
             >
               Sair

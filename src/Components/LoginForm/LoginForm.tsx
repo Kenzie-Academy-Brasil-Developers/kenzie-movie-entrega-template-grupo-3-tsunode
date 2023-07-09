@@ -14,11 +14,7 @@ import {
   StyledLoginForm,
   StyledLoginSection,
 } from "./StyleLogin";
-import {
-  Paragraph,
-  RegisterLink,
-  Title1
-} from "../../styles/typography";
+import { Paragraph, RegisterLink, Title1 } from "../../styles/typography";
 import { MediumYellowButton } from "../../styles/Buttons";
 
 export const LoginForm = () => {
@@ -34,8 +30,6 @@ export const LoginForm = () => {
     email: string;
     password: string;
   }
-
-
 
   const { loginUser } = useContext(UserContext);
 
@@ -55,7 +49,9 @@ export const LoginForm = () => {
           placeholder="senha"
           register={register("password")}
         />
-        {errors.password ? <Paragraph>{errors.password.message}</Paragraph> : null}
+        {errors.password ? (
+          <Paragraph>{errors.password.message}</Paragraph>
+        ) : null}
         <LoginLowerSection>
           <MediumYellowButton buttonsize={undefined}>Entrar</MediumYellowButton>
           <Paragraph>ou</Paragraph>

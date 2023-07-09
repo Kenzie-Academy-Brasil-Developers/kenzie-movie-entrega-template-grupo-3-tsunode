@@ -1,5 +1,5 @@
-import { ReactNode, createContext, useEffect, useState } from 'react';
-import { api } from '../services/api';
+import { ReactNode, createContext, useEffect, useState } from "react";
+import { api } from "../services/api";
 
 interface MovieProviderProps {
   children: ReactNode;
@@ -52,11 +52,11 @@ interface IMovieListContext {
   reviews: IReview[];
   setReviews: React.Dispatch<React.SetStateAction<IReview[]>>;
   userReview: IReview | null;
-  setUserReview:  React.Dispatch<React.SetStateAction<IReview | null>>;
+  setUserReview: React.Dispatch<React.SetStateAction<IReview | null>>;
   userReviewId: number;
   setUserReviewId: React.Dispatch<React.SetStateAction<number>>;
-  movieWithReview:  IMovies | null;
-  setMovieWithReview:  React.Dispatch<React.SetStateAction<IMovies | null>>;
+  movieWithReview: IMovies | null;
+  setMovieWithReview: React.Dispatch<React.SetStateAction<IMovies | null>>;
 }
 
 export const MovieContext = createContext({} as IMovieListContext);
@@ -92,7 +92,7 @@ export const MovieProvider = ({ children }: MovieProviderProps) => {
   useEffect(() => {
     const allMoviesWithReviewFunction = async () => {
       try {
-        const { data } = await api.get('/movies?_embed=reviews');
+        const { data } = await api.get("/movies?_embed=reviews");
         setAllMoviesWithReview(data);
       } catch (error: any) {
         console.log(error.message);

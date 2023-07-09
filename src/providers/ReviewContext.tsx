@@ -1,7 +1,7 @@
-import { ReactNode, createContext, useContext } from 'react';
-import { api } from '../services/api';
-import { MovieContext } from './MovieContext';
-import { UserContext } from './UserContext';
+import { ReactNode, createContext, useContext } from "react";
+import { api } from "../services/api";
+import { MovieContext } from "./MovieContext";
+import { UserContext } from "./UserContext";
 
 interface ReviewProviderProps {
   children: ReactNode;
@@ -20,11 +20,11 @@ export const ReviewProvider = ({ children }: ReviewProviderProps) => {
 
   const { setIsOpenAtt } = useContext(UserContext);
 
-  const localMovieId = localStorage.getItem('@LOCALMOVIEID');
+  const localMovieId = localStorage.getItem("@LOCALMOVIEID");
 
-  const token = localStorage.getItem('@TOKEN');
+  const token = localStorage.getItem("@TOKEN");
 
-  const userId = localStorage.getItem('@USERID');
+  const userId = localStorage.getItem("@USERID");
 
   const header = {
     headers: {
@@ -32,8 +32,7 @@ export const ReviewProvider = ({ children }: ReviewProviderProps) => {
     },
   };
 
-
-  const createReview = async (formData:any) => {
+  const createReview = async (formData: any) => {
     try {
       const { data } = await api.post(
         `/reviews`,
@@ -53,7 +52,7 @@ export const ReviewProvider = ({ children }: ReviewProviderProps) => {
     }
   };
 
-  const attReview = async (formData:any) => {
+  const attReview = async (formData: any) => {
     try {
       await api.put(
         `/reviews/${userReviewId}`,
@@ -72,7 +71,7 @@ export const ReviewProvider = ({ children }: ReviewProviderProps) => {
       setIsOpenAtt(false);
     } catch (error) {
       console.log(error);
-    }finally {
+    } finally {
       window.location.reload();
     }
   };

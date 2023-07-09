@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { styled } from "styled-components";
 
 export const StyledRegister = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ export const StyledRegisterForm = styled.form`
   flex-wrap: wrap;
   padding: 1rem 1.5rem;
   margin-bottom: 7rem;
-  input{
+  input {
     width: 21rem;
     height: 4rem;
   }
@@ -32,7 +32,7 @@ export const StyledRegisterForm = styled.form`
       font-family: var(--ff);
       font-weight: 700;
     }
-    input{
+    input {
       width: 80vw;
     }
   }

@@ -3,7 +3,11 @@ import { UserContext } from "../../providers/UserContext";
 import { ReviewContext } from "../../providers/ReviewContext";
 import { useForm } from "react-hook-form";
 import { StyledModalOverlay } from "../../styles/Overlay";
-import { CloseModal, StyledModalForm, StyledModalTitle } from "../Modal/ModalStyle";
+import {
+  CloseModal,
+  StyledModalForm,
+  StyledModalTitle,
+} from "../Modal/ModalStyle";
 import { Title2 } from "../../styles/typography";
 import { StyledSelect, StyledTextArea } from "../../styles/Inputs";
 import { SmallYellowButton } from "../../styles/Buttons";
@@ -52,7 +56,7 @@ export const ModalAtt = () => {
 
   return (
     <StyledModalOverlay>
-      <StyledModalForm onSubmit={handleSubmit(submit)} ref={modalClose} >
+      <StyledModalForm onSubmit={handleSubmit(submit)} ref={modalClose}>
         <StyledModalTitle>
           <Title2>Editar</Title2>
           <CloseModal onClick={() => setIsOpenAtt(false)}>X</CloseModal>
@@ -78,7 +82,9 @@ export const ModalAtt = () => {
           {...register("description")}
           required
         ></StyledTextArea>
-        <SmallYellowButton buttonsize={undefined} type="submit">editar</SmallYellowButton>
+        <SmallYellowButton buttonsize={undefined} type="submit">
+          editar
+        </SmallYellowButton>
       </StyledModalForm>
     </StyledModalOverlay>
   );

@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
 export const StyledLoginSection = styled.section`
-  background-image: url("../../../src/assets/Rectangle 13.png");
+  background-image: url("../../../src/assets/Rectangle 13.svg");
   background-size: cover;
   height: 82vh;
   margin-bottom: -2rem;
-  
-  `;
+`;
 export const StyledLoginForm = styled.form`
   background-color: var(--lightgray2);
   display: flex;
@@ -17,7 +16,7 @@ export const StyledLoginForm = styled.form`
   gap: 2rem;
   border-radius: 8px;
   margin-top: 4rem;
-  input{
+  input {
     height: 3rem;
   }
   @media screen and (max-width: 844px) {

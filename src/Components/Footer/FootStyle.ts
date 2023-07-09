@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { styled } from "styled-components";
 
 export const StyledFooter = styled.footer`
   width: 100%;
@@ -17,7 +17,7 @@ export const StyledFootDiv = styled.div`
   text-align: center;
   flex-direction: column;
   &:before {
-    content: '';
+    content: "";
     width: 250%;
     height: 0.625rem;
     margin-bottom: 2.3rem;

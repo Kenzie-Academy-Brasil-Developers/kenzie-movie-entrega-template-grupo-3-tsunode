@@ -26,4 +26,4 @@ export const StyledTextArea = styled.textarea`
   font-family: var(--ff);
   color: var(--white);
   font-weight: 600;
-`
+`;

@@ -29,7 +29,7 @@ export const StyledMainSec = styled.section`
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
-  p{
+  p {
     max-width: 30vw;
   }
   @media screen and (max-width: 897px) {

@@ -1,12 +1,7 @@
-import {
-  ReactNode,
-  createContext,
-  useEffect,
-  useState,
-} from 'react';
-import { api } from '../services/api';
-import { useNavigate } from 'react-router-dom';
-import { toast } from "react-toastify"
+import { ReactNode, createContext, useEffect, useState } from "react";
+import { api } from "../services/api";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface UserProviderProps {
   children: ReactNode;
@@ -47,36 +42,35 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   const [isOpenDelete, setIsOpenDelete] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const notify = (message: any) => toast(message) 
-
+  const notify = (message: any) => toast(message);
 
   const createUser = async (formData: any) => {
     try {
-        await api.post('/users', {
+      await api.post("/users", {
         email: formData.email,
         password: formData.password,
         name: formData.name,
       });
-      notify('Usuário criado com sucesso')
-      navigate('/loginPage')
+      notify("Usuário criado com sucesso");
+      navigate("/loginPage");
     } catch (error) {
-      notify('Algo deu errado')
+      notify("Algo deu errado");
       console.log(error);
     }
   };
 
   const loginUser = async (formData: any) => {
     try {
-      const { data } = await api.post('/login', formData);
-      localStorage.setItem('@TOKEN', data.accessToken);
-      localStorage.setItem('@USERID', data.user.id);
-      localStorage.setItem('@USERNAME', data.user.name);
-      notify('Usuário logado com sucesso')
-      navigate('/')
+      const { data } = await api.post("/login", formData);
+      localStorage.setItem("@TOKEN", data.accessToken);
+      localStorage.setItem("@USERID", data.user.id);
+      localStorage.setItem("@USERNAME", data.user.name);
+      notify("✅Usuário logado com sucesso");
+      navigate("/");
     } catch (error) {
-      notify('Email ou senha incorretos')
+      notify("⚠️ Email ou senha incorretos");
       console.log(error);
     }
   };

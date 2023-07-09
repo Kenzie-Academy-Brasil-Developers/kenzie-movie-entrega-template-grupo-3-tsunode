@@ -1,12 +1,17 @@
-import {  useEffect, useState } from 'react';
-import { HighlightedLetter, Paragraph, StarAvg, Title2 } from '../../styles/typography';
-import { api } from '../../services/api';
-import { ReviewArea, StyledItem } from './StyleReview';
-import { StyledStarSec } from '../MoviesCard/MoviesCardStyle';
-import { star } from '../../assets/star';
+import { useEffect, useState } from "react";
+import {
+  HighlightedLetter,
+  Paragraph,
+  StarAvg,
+  Title2,
+} from "../../styles/typography";
+import { api } from "../../services/api";
+import { ReviewArea, StyledItem } from "./StyleReview";
+import { StyledStarSec } from "../MoviesCard/MoviesCardStyle";
+import { star } from "../../assets/star";
 
 export const ReviewsCard = ({ review, index }: any) => {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     const getUserName = async () => {
@@ -24,11 +29,11 @@ export const ReviewsCard = ({ review, index }: any) => {
     <StyledItem key={index}>
       <HighlightedLetter>{user[0]}</HighlightedLetter>
       <StyledStarSec>
-      {star()}
-      <StarAvg>{review.score}</StarAvg>
+        {star()}
+        <StarAvg>{review.score}</StarAvg>
       </StyledStarSec>
       <ReviewArea>
-      <Paragraph>"{review.description}"</Paragraph>
+        <Paragraph>"{review.description}"</Paragraph>
       </ReviewArea>
       <Title2>{user}</Title2>
     </StyledItem>

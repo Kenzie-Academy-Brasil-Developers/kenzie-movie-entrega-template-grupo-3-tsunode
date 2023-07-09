@@ -68,4 +68,4 @@ export const HighlightedLetter = styled.h2`
   border-radius: 20rem;
   width: 3rem;
   height: 3rem;
-`
+`;

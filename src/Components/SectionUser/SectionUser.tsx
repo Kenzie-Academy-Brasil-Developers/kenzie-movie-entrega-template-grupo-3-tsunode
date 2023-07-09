@@ -62,9 +62,7 @@ export const SectionUser = () => {
           <StyledAvaliationSec>
             <StyledMainSec>
               <DescSec>
-                <Paragraph>
-                 {userReview.description}
-                </Paragraph>
+                <Paragraph>{userReview.description}</Paragraph>
               </DescSec>
               <ButtonSec>
                 <StarAvg>

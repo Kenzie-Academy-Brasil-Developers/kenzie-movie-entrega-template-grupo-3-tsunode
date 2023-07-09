@@ -26,7 +26,7 @@ export const Register = (): JSX.Element => {
     resolver: zodResolver(RegisterFormSchema),
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   interface IRegisterUser extends z.infer<typeof RegisterFormSchema> {
     name: string;
@@ -45,8 +45,8 @@ export const Register = (): JSX.Element => {
       <StyledRegisterForm onSubmit={handleSubmit(onSubmit)}>
         <StyledTitleSection>
           <Title1>Cadastro</Title1>
-          <RegisterLink onClick={() => navigate('/')}>
-            <img src={arrow}  alt="" /> Voltar
+          <RegisterLink onClick={() => navigate("/")}>
+            <img src={arrow} alt="" /> Voltar
           </RegisterLink>
         </StyledTitleSection>
         <Paragraph>Preencha os campos para cadastrar-se</Paragraph>
@@ -64,7 +64,9 @@ export const Register = (): JSX.Element => {
             type="password"
             register={register("password")}
           />
-          {errors.password ? <Paragraph>{errors.password.message}</Paragraph> : null}
+          {errors.password ? (
+            <Paragraph>{errors.password.message}</Paragraph>
+          ) : null}
 
           <Input
             placeholder="Confirmar Senha"

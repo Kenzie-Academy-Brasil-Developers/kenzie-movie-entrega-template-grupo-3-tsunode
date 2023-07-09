@@ -1,7 +1,6 @@
-
-import { MoviesList } from '../../Components/MoviesList/MoviesList.tsx';
-import { Header } from '../../Components/Header/Header.tsx';
-import { Footer } from '../../Components/Footer/Foot.tsx';
+import { MoviesList } from "../../Components/MoviesList/MoviesList.tsx";
+import { Header } from "../../Components/Header/Header.tsx";
+import { Footer } from "../../Components/Footer/Foot.tsx";
 
 export interface IMovies {
   id: number;

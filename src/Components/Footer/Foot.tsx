@@ -1,5 +1,5 @@
-import { Title1MobileB } from '../../styles/typography';
-import { StyledFootDiv, StyledFooter } from './FootStyle';
+import { Title1MobileB } from "../../styles/typography";
+import { StyledFootDiv, StyledFooter } from "./FootStyle";
 
 export const Footer = () => {
   return (

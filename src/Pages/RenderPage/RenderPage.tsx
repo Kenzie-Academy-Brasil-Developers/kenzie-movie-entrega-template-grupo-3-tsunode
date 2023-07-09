@@ -1,14 +1,7 @@
 import { useContext, useEffect } from "react";
-import {
-  StyledStarSec
-} from "../../Components/MoviesCard/MoviesCardStyle";
+import { StyledStarSec } from "../../Components/MoviesCard/MoviesCardStyle";
 import { MediumYellowButton, SmallYellowButton } from "../../styles/Buttons";
-import {
-  Paragraph,
-  StarAvg,
-  Title1,
-  Title2,
-} from "../../styles/typography";
+import { Paragraph, StarAvg, Title1, Title2 } from "../../styles/typography";
 import { api } from "../../services/api";
 import { Header } from "../../Components/Header/Header";
 import { Footer } from "../../Components/Footer/Foot";
@@ -31,7 +24,7 @@ import { BlackStar } from "../../assets/starBlack";
 import { Modal } from "../../Components/Modal/Modal";
 import { LogoutButton } from "../../Components/Header/styles";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 
 export const RenderPage = () => {
   const { setMovieWithReview, setReviews, movieWithReview, reviews } =
@@ -41,7 +34,7 @@ export const RenderPage = () => {
 
   const userId = localStorage.getItem("@USERID");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadMovie = async () => {
@@ -64,7 +57,7 @@ export const RenderPage = () => {
 
   const average = (sum / reviews?.length).toFixed(1);
 
-  const notify = (message: any) => toast(message)
+  const notify = (message: any) => toast(message);
 
   return (
     <>
@@ -76,7 +69,9 @@ export const RenderPage = () => {
             <Header />
             <StyledMovieDesc>
               <div>
-                <LogoutButton onClick={() => navigate('/')}>Início {'>'}</LogoutButton>
+                <LogoutButton onClick={() => navigate("/")}>
+                  Início {">"}
+                </LogoutButton>
                 <LogoutButton>{movieWithReview.name}</LogoutButton>
               </div>
               <StyledMovieDiv>
@@ -101,15 +96,15 @@ export const RenderPage = () => {
             {userId == null ? (
               <StyledAvaliationSec>
                 <Title1>Avaliações</Title1>
-                  <MediumYellowButton
-                    buttonsize={12}
-                    onClick={() => {
-                      notify("Esteja logado para poder avaliar");
-                    }}
-                  >
-                    {BlackStar()}
-                    Avaliar
-                  </MediumYellowButton>
+                <MediumYellowButton
+                  buttonsize={12}
+                  onClick={() => {
+                    notify("⛔ Esteja logado para poder avaliar");
+                  }}
+                >
+                  {BlackStar()}
+                  Avaliar
+                </MediumYellowButton>
               </StyledAvaliationSec>
             ) : (
               <SectionUser />
@@ -123,7 +118,7 @@ export const RenderPage = () => {
           {isOpen ? <Modal /> : null}
           {isOpenAtt ? <ModalAtt /> : null}
           {isOpenDelete ? <ModalDelete /> : null}
-          
+
           <Footer />
         </section>
       )}
