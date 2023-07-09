@@ -31,6 +31,8 @@ import {
 import { star } from "../../assets/star";
 import { BlackStar } from "../../assets/starBlack";
 import { Modal } from "../../Components/Modal/Modal";
+import { LogoutButton } from "../../Components/Header/styles";
+import { useNavigate } from "react-router-dom";
 
 export const RenderPage = () => {
   const { setMovieWithReview, setReviews, movieWithReview, reviews } =
@@ -39,6 +41,8 @@ export const RenderPage = () => {
   const { isOpen, isOpenAtt, isOpenDelete } = useContext(UserContext);
 
   const userId = localStorage.getItem("@USERID");
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const loadMovie = async () => {
@@ -70,6 +74,10 @@ export const RenderPage = () => {
           <StyledMovieSec backgroundimg={movieWithReview.image}>
             <Header />
             <StyledMovieDesc>
+              <div>
+                <LogoutButton onClick={() => navigate('/')}>Início {'>'}</LogoutButton>
+                <LogoutButton>{movieWithReview.name}</LogoutButton>
+              </div>
               <StyledMovieDiv>
                 <SmallYellowButton buttonsize={10}>
                   {movieWithReview.type}
