@@ -48,13 +48,13 @@ export const LoginForm = () => {
       <StyledLoginForm onSubmit={handleSubmit(submit)}>
         <Title1>Login</Title1>
         <Input type="email" placeholder="E-mail" register={register("email")} />
-        {errors.email ? <p>{errors.email.message}</p> : null}
+        {errors.email ? <Paragraph>{errors.email.message}</Paragraph> : null}
         <Input
           type="text"
           placeholder="senha"
           register={register("password")}
         />
-        {errors.password ? <p>{errors.password.message}</p> : null}
+        {errors.password ? <Paragraph>{errors.password.message}</Paragraph> : null}
         <LoginLowerSection>
           <MediumYellowButton buttonsize={undefined}>Entrar</MediumYellowButton>
           <Paragraph>ou</Paragraph>

@@ -78,9 +78,8 @@ export const Modal = () => {
         ></StyledTextArea>
         <div>
           <SmallYellowButton
-            type="button"
+            type="submit"
             buttonsize={12}
-            onClick={() => [setIsOpen(false), { ...register("movieId") }]}
           >
             Cadastrar avaliação
           </SmallYellowButton>

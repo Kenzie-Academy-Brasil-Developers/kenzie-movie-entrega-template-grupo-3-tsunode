@@ -15,6 +15,7 @@ import { useContext } from "react";
 import { UserContext } from "../../providers/UserContext";
 import { RegisterFormSchema } from "./RegisterFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 
 export const Register = (): JSX.Element => {
   const {
@@ -24,6 +25,8 @@ export const Register = (): JSX.Element => {
   } = useForm<IRegisterUser>({
     resolver: zodResolver(RegisterFormSchema),
   });
+
+  const navigate = useNavigate()
 
   interface IRegisterUser extends z.infer<typeof RegisterFormSchema> {
     name: string;
@@ -42,26 +45,26 @@ export const Register = (): JSX.Element => {
       <StyledRegisterForm onSubmit={handleSubmit(onSubmit)}>
         <StyledTitleSection>
           <Title1>Cadastro</Title1>
-          <RegisterLink>
-            <img src={arrow} alt="" /> Voltar
+          <RegisterLink onClick={() => navigate('/')}>
+            <img src={arrow}  alt="" /> Voltar
           </RegisterLink>
         </StyledTitleSection>
         <Paragraph>Preencha os campos para cadastrar-se</Paragraph>
         <StyledInputArea>
           <Input placeholder="Nome" type="text" register={register("name")} />
-          {errors.name ? <p>{errors.name.message}</p> : null}
+          {errors.name ? <Paragraph>{errors.name.message}</Paragraph> : null}
           <Input
             placeholder="E-mail"
             type="email"
             register={register("email")}
           />
-          {errors.email ? <p>{errors.email.message}</p> : null}
+          {errors.email ? <Paragraph>{errors.email.message}</Paragraph> : null}
           <Input
             placeholder="Senha"
             type="password"
             register={register("password")}
           />
-          {errors.password ? <p>{errors.password.message}</p> : null}
+          {errors.password ? <Paragraph>{errors.password.message}</Paragraph> : null}
 
           <Input
             placeholder="Confirmar Senha"
@@ -69,7 +72,7 @@ export const Register = (): JSX.Element => {
             register={register("confirmPassword")}
           />
           {errors.confirmPassword ? (
-            <p>{errors.confirmPassword.message}</p>
+            <Paragraph>{errors.confirmPassword.message}</Paragraph>
           ) : null}
         </StyledInputArea>
         <StyledButtonLine>

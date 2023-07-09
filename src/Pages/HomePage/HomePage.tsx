@@ -26,9 +26,6 @@ export interface IMovies {
 export const HomePage = () => {
   return (
     <div>
-      <a href="/">homePage</a>
-      <a href="/loginPage">loginPage</a>
-      <a href="/registerPage">registerPage</a>
       <Header />
       <MoviesList />
       <Footer />
