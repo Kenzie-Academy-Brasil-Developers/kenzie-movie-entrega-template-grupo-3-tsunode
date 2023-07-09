@@ -57,7 +57,8 @@ export const Modal = () => {
           <Title2>Avaliação</Title2>
           <CloseModal onClick={() => setIsOpen(false)}>X</CloseModal>
         </StyledModalTitle>
-        <StyledSelect id="" {...register("score")}>
+        <StyledSelect id="" {...register("score")} required>
+           <option value="">Selecionar nota</option>
           <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>

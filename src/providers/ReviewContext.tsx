@@ -71,6 +71,8 @@ export const ReviewProvider = ({ children }: ReviewProviderProps) => {
       setIsOpenAtt(false);
     } catch (error) {
       console.log(error);
+    }finally {
+      window.location.reload();
     }
   };
 
