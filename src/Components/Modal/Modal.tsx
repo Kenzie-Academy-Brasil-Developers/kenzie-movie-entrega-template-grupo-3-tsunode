@@ -76,6 +76,7 @@ export const Modal = () => {
           cols={30}
           placeholder="Deixe um comentário"
           {...register("description")}
+          required
         ></StyledTextArea>
         <div>
           <SmallYellowButton

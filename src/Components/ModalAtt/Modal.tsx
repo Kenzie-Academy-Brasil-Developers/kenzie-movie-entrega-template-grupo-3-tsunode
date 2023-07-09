@@ -78,6 +78,7 @@ export const ModalAtt = () => {
           rows={10}
           placeholder="Deixe um comentário"
           {...register("description")}
+          required
         ></StyledTextArea>
         <SmallYellowButton buttonsize={undefined} type="submit">editar</SmallYellowButton>
       </StyledModalForm>
