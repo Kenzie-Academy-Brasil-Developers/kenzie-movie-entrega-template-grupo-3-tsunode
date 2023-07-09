@@ -36,6 +36,8 @@ export const LoginForm = () => {
     password: string;
   }
 
+
+
   const { loginUser } = useContext(UserContext);
 
   const submit = (formData: FormData) => {
@@ -50,7 +52,7 @@ export const LoginForm = () => {
         <Input type="email" placeholder="E-mail" register={register("email")} />
         {errors.email ? <Paragraph>{errors.email.message}</Paragraph> : null}
         <Input
-          type="text"
+          type="password"
           placeholder="senha"
           register={register("password")}
         />

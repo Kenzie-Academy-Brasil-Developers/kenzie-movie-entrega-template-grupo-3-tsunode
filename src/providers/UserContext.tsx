@@ -7,6 +7,7 @@ import {
 } from 'react';
 import { api } from '../services/api';
 import { MovieContext } from './MovieContext';
+import { useNavigate } from 'react-router-dom';
 
 interface UserProviderProps {
   children: ReactNode;
@@ -47,6 +48,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   const [isOpenDelete, setIsOpenDelete] = useState(false);
 
+  const navigate = useNavigate()
+
+
+
   const createUser = async (formData) => {
     try {
       const { data } = await api.post('/users', {
@@ -54,6 +59,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         password: formData.password,
         name: formData.name,
       });
+      navigate('/loginPage')
     } catch (error) {
       console.log(error);
     }
@@ -65,6 +71,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       localStorage.setItem('@TOKEN', data.accessToken);
       localStorage.setItem('@USERID', data.user.id);
       localStorage.setItem('@USERNAME', data.user.name);
+      navigate('/')
     } catch (error) {
       console.log(error);
     }
