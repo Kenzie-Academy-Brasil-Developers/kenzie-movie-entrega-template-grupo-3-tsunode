@@ -16,7 +16,7 @@ export const MoviesCard = ({ movie }: IMoviesCardProps) => {
     return acc + Number(cur.score);
   }, 0);
 
-  const average = sum / movie.reviews?.length;
+  const average = (sum / movie.reviews?.length).toFixed(1);;
 
   return (
     <StyledItem>

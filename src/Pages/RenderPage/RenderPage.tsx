@@ -63,7 +63,7 @@ export const RenderPage = () => {
     return acc + Number(cur.score);
   }, 0);
 
-  const average = sum / reviews?.length;
+  const average = (sum / reviews?.length).toFixed(1);
 
   return (
     <>
