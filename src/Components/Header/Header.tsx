@@ -5,6 +5,7 @@ import { HeaderCap, Paragraph } from '../../styles/Typography';
 import { SmallYellowButton } from '../../styles/Buttons';
 
 
+
 export const Header = () => {
   const token = localStorage.getItem('@TOKEN');
 
