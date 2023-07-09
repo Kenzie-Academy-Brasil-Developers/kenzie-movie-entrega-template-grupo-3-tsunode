@@ -11,7 +11,6 @@ import { LoginForm } from "../../Components/LoginForm/LoginForm";
 import { Header } from "../../Components/Header/Header";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../routes/Auth";
-import { RenderPage } from "../RenderPage/RenderPage";
 
 export const LoginPage = () => {
   const { isAuthenticated } = useAuth();
