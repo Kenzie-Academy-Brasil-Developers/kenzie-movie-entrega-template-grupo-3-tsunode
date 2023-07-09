@@ -1,6 +1,4 @@
 import { useContext } from 'react';
-import { IMovies } from '../../Pages/HomePage/HomePage';
-
 import { MoviesCard } from '../MoviesCard/MoviesCard';
 import { StyledList, StyledListSection } from './MoviesList';
 import { MovieContext } from '../../providers/MovieContext';

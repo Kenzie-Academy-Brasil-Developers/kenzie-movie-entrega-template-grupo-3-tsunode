@@ -51,12 +51,12 @@ interface IMovieListContext {
   setAllMoviesWithReview: React.Dispatch<React.SetStateAction<IMovies[]>>;
   reviews: IReview[];
   setReviews: React.Dispatch<React.SetStateAction<IReview[]>>;
-  userReview: IReview[];
-  setUserReview: React.Dispatch<React.SetStateAction<IReview[]>>;
+  userReview: IReview;
+  setUserReview: React.Dispatch<React.SetStateAction<IReview>>;
   userReviewId: number;
   setUserReviewId: React.Dispatch<React.SetStateAction<number>>;
-  movieWithReview: IMovies[];
-  setMovieWithReview: React.Dispatch<React.SetStateAction<IMovies[]>>;
+  movieWithReview: IMovies;
+  setMovieWithReview: React.Dispatch<React.SetStateAction<IMovies>>;
 }
 
 export const MovieContext = createContext({} as IMovieListContext);

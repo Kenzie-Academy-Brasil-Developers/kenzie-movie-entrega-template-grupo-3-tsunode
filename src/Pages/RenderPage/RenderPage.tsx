@@ -1,17 +1,36 @@
-import { useContext, useEffect, useState } from 'react';
-import { StyledUpperSection } from '../../Components/MoviesCard/MoviesCardStyle';
-import { SmallYellowButton } from '../../styles/Buttons';
-import { Paragraph, Title2 } from '../../styles/typography';
-import { api } from '../../services/api';
-import { Header } from '../../Components/Header/Header';
-import { Footer } from '../../Components/Footer/Foot';
-import { Modal } from '../../Components/Modal/Modal';
-import { ModalAtt } from '../../Components/ModalAtt/Modal';
-import { ReviewsCard } from '../../Components/ReviewsCard/ReviewsCard';
-import { SectionUser } from '../../Components/SectionUser/SectionUser';
-import { MovieContext } from '../../providers/MovieContext';
-import { UserContext } from '../../providers/UserContext';
-import { ModalDelete } from '../../Components/ModalDelete/Modal';
+import { useContext, useEffect } from "react";
+import {
+  StyledStarSec,
+  StyledUpperSection,
+} from "../../Components/MoviesCard/MoviesCardStyle";
+import { MediumYellowButton, SmallYellowButton } from "../../styles/Buttons";
+import {
+  Paragraph,
+  StarAvg,
+  Title1,
+  Title1MobileB,
+  Title2,
+} from "../../styles/Typography";
+import { api } from "../../services/api";
+import { Header } from "../../Components/Header/Header";
+import { Footer } from "../../Components/Footer/Foot";
+import { ModalAtt } from "../../Components/ModalAtt/Modal";
+import { ReviewsCard } from "../../Components/ReviewsCard/ReviewsCard";
+import { SectionUser } from "../../Components/SectionUser/SectionUser";
+import { MovieContext } from "../../providers/MovieContext";
+import { UserContext } from "../../providers/UserContext";
+import { ModalDelete } from "../../Components/ModalDelete/Modal";
+import {
+  AvaliationList,
+  StyledAvaliationSec,
+  StyledMovieDesc,
+  StyledMovieDiv,
+  StyledMovieSec,
+  StyledMovieText,
+} from "./RenderStyle";
+import { star } from "../../assets/star";
+import { BlackStar } from "../../assets/starBlack";
+import { Modal } from "../../Components/Modal/Modal";
 
 export const RenderPage = () => {
   const { setMovieWithReview, setReviews, movieWithReview, reviews } =
@@ -19,17 +38,17 @@ export const RenderPage = () => {
 
   const { isOpen, isOpenAtt, isOpenDelete } = useContext(UserContext);
 
-  const userId = localStorage.getItem('@USERID');
+  const userId = localStorage.getItem("@USERID");
 
   useEffect(() => {
     const loadMovie = async () => {
-      const movieId = localStorage.getItem('@LOCALMOVIEID');
+      const movieId = localStorage.getItem("@LOCALMOVIEID");
       try {
         const { data } = await api.get(`/movies/${movieId}?_embed=reviews`);
         setMovieWithReview(data);
         setReviews(data.reviews);
       } catch (error) {
-        console.log(error.message);
+        console.log(error);
       }
     };
     loadMovie();
@@ -47,55 +66,57 @@ export const RenderPage = () => {
       {movieWithReview == null ? (
         <div>loading</div>
       ) : (
-        <div>
-          <Header />
-          <img src={movieWithReview.image} />
-          <StyledUpperSection>
-            <SmallYellowButton buttonsize={10}>
-              {movieWithReview.type}
-            </SmallYellowButton>
-            <Paragraph>{movieWithReview.duration}</Paragraph>
-          </StyledUpperSection>
-          <StyledUpperSection>
-            <Title2>{movieWithReview.name}</Title2>
-            <div>
-              <Paragraph>{average}</Paragraph>
-            </div>
-          </StyledUpperSection>
-          <Paragraph>{movieWithReview.synopsis}</Paragraph>
+        <section>
+          <StyledMovieSec backgroundimg={movieWithReview.image}>
+            <Header />
+            <StyledMovieDesc>
+              <StyledMovieDiv>
+                <SmallYellowButton buttonsize={10}>
+                  {movieWithReview.type}
+                </SmallYellowButton>
+                <Paragraph>{movieWithReview.duration}m</Paragraph>
+              </StyledMovieDiv>
+              <StyledMovieDiv>
+                <Title2>{movieWithReview.name}</Title2>
+                <StyledStarSec>
+                  {star()}
+                  <StarAvg>{average}</StarAvg>
+                </StyledStarSec>
+              </StyledMovieDiv>
+            </StyledMovieDesc>
+          </StyledMovieSec>
+          <StyledMovieText>
+            <Paragraph>"{movieWithReview.synopsis}"</Paragraph>
+          </StyledMovieText>
           <div>
             {userId == null ? (
-              <div>
-                <Paragraph>Avaliações</Paragraph>
-
-                <button
-                  onClick={() => {
-                    alert('Esteja logado para poder avaliar');
-                  }}
-                >
-                  Avaliar
-                </button>
-              </div>
+              <StyledAvaliationSec>
+                <Title1>Avaliações</Title1>
+                  <MediumYellowButton
+                    buttonsize={12}
+                    onClick={() => {
+                      alert("Esteja logado para poder avaliar");
+                    }}
+                  >
+                    {BlackStar()}
+                    Avaliar
+                  </MediumYellowButton>
+              </StyledAvaliationSec>
             ) : (
               <SectionUser />
             )}
-
-            {reviews.map((review, index) => (
-              <ReviewsCard review={review} index={index} />
-            ))}
+            <AvaliationList>
+              {reviews.map((review, index) => (
+                <ReviewsCard review={review} index={index} />
+              ))}
+            </AvaliationList>
           </div>
           {isOpen ? <Modal /> : null}
           {isOpenAtt ? <ModalAtt /> : null}
           {isOpenDelete ? <ModalDelete /> : null}
-          <button
-            onClick={() => {
-              console.log(reviews);
-            }}
-          >
-            ver reviews
-          </button>
+          
           <Footer />
-        </div>
+        </section>
       )}
     </>
   );

@@ -28,6 +28,10 @@ export const MediumYellowButton = styled.button<IButtonSize>`
   font-family: var(--ff);
   font-weight: 600;
   transition: 0.2s ease;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
   &:hover {
     background-color: gold;
   }

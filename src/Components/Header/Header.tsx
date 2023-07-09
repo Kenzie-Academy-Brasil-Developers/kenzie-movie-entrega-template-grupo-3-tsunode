@@ -1,5 +1,9 @@
 import logo from '../../assets/logo.svg';
 import { useNavigate } from 'react-router-dom';
+import { HeaderLetter, InnerHeaderDiv, LogoutButton, OuterHeaderDiv, StyledHeadSection, StyledHeader } from './styles';
+import { HeaderCap, Paragraph } from '../../styles/Typography';
+import { SmallYellowButton } from '../../styles/Buttons';
+
 
 export const Header = () => {
   const token = localStorage.getItem('@TOKEN');
@@ -11,30 +15,30 @@ export const Header = () => {
   return (
     <>
       {token == null ? (
-        <header>
+        <StyledHeader>
           <img src={logo} alt="" />
-          <div>
-            <p onClick={() => navigate('/registerPage')}>Cadastre-se</p>
-            <button onClick={() => navigate('/loginPage')}>Entrar</button>
-          </div>
-        </header>
+          <StyledHeadSection>
+            <HeaderCap onClick={() => navigate('/registerPage')}>Cadastre-se</HeaderCap>
+            <SmallYellowButton buttonsize={8} onClick={() => navigate('/loginPage')}>Entrar</SmallYellowButton>
+          </StyledHeadSection>
+        </StyledHeader>
       ) : (
-        <header>
+        <StyledHeader>
           <img src={logo} alt="" />
-          <div>
-            <div>
-              <button>{name[0]}</button>
-              <p>{name}</p>
-            </div>
-            <button
+          <OuterHeaderDiv>
+            <InnerHeaderDiv>
+              <HeaderLetter>{name[0]}</HeaderLetter>
+              <Paragraph>{name}</Paragraph>
+            </InnerHeaderDiv>
+            <LogoutButton
               onClick={() => {
                 localStorage.clear(), navigate('/');
               }}
             >
               Sair
-            </button>
-          </div>
-        </header>
+            </LogoutButton>
+          </OuterHeaderDiv>
+        </StyledHeader>
       )}
     </>
   );

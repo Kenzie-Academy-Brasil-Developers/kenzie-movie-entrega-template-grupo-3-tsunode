@@ -1,14 +1,13 @@
 import { styled } from 'styled-components';
 
 export const StyledRegister = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
+  width: 100vw;
   justify-content: center;
   align-items: center;
-  padding: 12vw 0;
 `;
 export const StyledTitleSection = styled.div`
+  margin-top: 3rem;
   display: flex;
   text-align: center;
   align-items: center;
@@ -17,11 +16,15 @@ export const StyledTitleSection = styled.div`
 export const StyledRegisterForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 48rem;
+  width: 50rem;
   gap: 3rem;
   flex-wrap: wrap;
   padding: 1rem 1.5rem;
-
+  margin-bottom: 7rem;
+  input{
+    width: 21rem;
+    height: 4rem;
+  }
   @media screen and (max-width: 752px) {
     h2 {
       color: var(--white);
@@ -29,15 +32,15 @@ export const StyledRegisterForm = styled.form`
       font-family: var(--ff);
       font-weight: 700;
     }
-    input {
-      width: auto;
-      flex-grow: 1;
+    input{
+      width: 80vw;
     }
   }
 `;
 export const StyledInputArea = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 2rem;
 `;
 export const StyledButtonLine = styled.section`

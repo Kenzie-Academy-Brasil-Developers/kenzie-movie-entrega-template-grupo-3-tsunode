@@ -15,13 +15,12 @@ export const StyledFootDiv = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  position: relative;
-  margin-top: 2rem;
-  &:after {
+  flex-direction: column;
+  &:before {
     content: '';
     width: 250%;
     height: 0.625rem;
-    position: absolute;
+    margin-bottom: 2.3rem;
     z-index: 99;
     background-color: var(--lightgray1);
     top: -4rem;

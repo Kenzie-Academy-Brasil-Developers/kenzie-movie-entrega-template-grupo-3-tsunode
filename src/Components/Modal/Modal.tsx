@@ -1,24 +1,42 @@
-import { useForm } from 'react-hook-form';
-import { api } from '../../services/api';
-import { toast } from 'react-toastify';
-import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../providers/UserContext';
-import { ReviewContext } from '../../providers/ReviewContext';
+import { useForm } from "react-hook-form";
+import { useContext, useEffect, useRef } from "react";
+import { UserContext } from "../../providers/UserContext";
+import { ReviewContext } from "../../providers/ReviewContext";
+import { StyledModalOverlay } from "../../styles/Overlay";
+import { CloseModal, StyledModalForm, StyledModalTitle } from "./ModalStyle";
+import { Title2 } from "../../styles/Typography";
+import { StyledSelect, StyledTextArea } from "../../styles/Inputs";
+import { SmallYellowButton } from "../../styles/Buttons";
 
 export const Modal = () => {
   const { setIsOpen } = useContext(UserContext);
-
   const { register, handleSubmit } = useForm<FormData>({});
+  const modalClose = useRef(null);
 
-  const token = localStorage.getItem('@TOKEN');
-  const userId = Number(localStorage.getItem('@USERID'));
-  const localMovieId = Number(localStorage.getItem('@LOCALMOVIEID'));
+  useEffect(() => {
+    const ClickOut = (e: any) => {
+      if (!modalClose.current?.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("mousedown", ClickOut);
+    return () => {
+      window.removeEventListener("mousedown", ClickOut);
+    };
+  }, []);
 
-  const header = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
+  useEffect(() => {
+    const PressOut = (e: any) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("keydown", PressOut);
+
+    return () => {
+      window.removeEventListener("keydown", PressOut);
+    };
+  }, []);
 
   interface FormData {
     score: number;
@@ -29,13 +47,17 @@ export const Modal = () => {
 
   const submit = (formData: FormData) => {
     createReview(formData);
+    console.log(formData)
   };
 
   return (
-    <>
-      <h2>Avaliação</h2>
-      <form action="" onSubmit={handleSubmit(submit)}>
-        <select id="" {...register('score')}>
+    <StyledModalOverlay>
+      <StyledModalForm onSubmit={handleSubmit(submit)} ref={modalClose}>
+        <StyledModalTitle>
+          <Title2>Avaliação</Title2>
+          <CloseModal onClick={() => setIsOpen(false)}>X</CloseModal>
+        </StyledModalTitle>
+        <StyledSelect id="" {...register("score")}>
           <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -47,21 +69,23 @@ export const Modal = () => {
           <option value="8">8</option>
           <option value="9">9</option>
           <option value="10">10</option>
-        </select>
-        <textarea
-          name=""
-          id=""
-          cols="30"
-          rows="10"
+        </StyledSelect>
+        <StyledTextArea
+          rows={10}
+          cols={30}
           placeholder="Deixe um comentário"
-          {...register('description')}
-        ></textarea>
-        <button>Cadastrar avaliação</button>
-      </form>
-
-      <button onClick={() => [setIsOpen(false), { ...register('movieId') }]}>
-        fechar
-      </button>
-    </>
+          {...register("description")}
+        ></StyledTextArea>
+        <div>
+          <SmallYellowButton
+            type="button"
+            buttonsize={12}
+            onClick={() => [setIsOpen(false), { ...register("movieId") }]}
+          >
+            Cadastrar avaliação
+          </SmallYellowButton>
+        </div>
+      </StyledModalForm>
+    </StyledModalOverlay>
   );
 };

@@ -5,12 +5,13 @@ export const StyledItem = styled.li`
   flex-direction: column;
   text-align: center;
   img {
-    border-top-right-radius: 2.5625rem;
-    border-top-left-radius: 2.5625rem;
-    border-bottom-right-radius: 2.5625rem;
-    border-bottom-left-radius: 2.5625rem;
+    border-radius: 2.5625rem;
     max-width: 100%;
     height: auto;
+    @media screen and (max-width: 1173px) {
+      border-radius: 4rem;
+    }
+    
   }
   @media screen and (max-width: 507px) {
     h3 {
@@ -32,3 +33,8 @@ export const StyledUpperSection = styled.div`
   text-align: center;
   align-items: center;
 `;
+export const StyledStarSec = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+`

@@ -1,8 +1,9 @@
 import { IMovies } from '../../Pages/HomePage/HomePage';
-import { StyledItem, StyledUpperSection } from './MoviesCardStyle';
+import { StyledItem, StyledStarSec, StyledUpperSection } from './MoviesCardStyle';
 import { SmallYellowButton } from '../../styles/Buttons';
-import { Paragraph, Title2 } from '../../styles/typography';
+import { Paragraph, Title2 } from '../../styles/Typography';
 import { useNavigate } from 'react-router-dom';
+import { star } from '../../assets/star';
 
 interface IMoviesCardProps {
   movie: IMovies;
@@ -32,7 +33,10 @@ export const MoviesCard = ({ movie }: IMoviesCardProps) => {
       </StyledUpperSection>
       <StyledUpperSection>
         <Title2>{movie.name}</Title2>
+        <StyledStarSec>
+        {star()}
         <Paragraph>{average}</Paragraph>
+        </StyledStarSec>
       </StyledUpperSection>
     </StyledItem>
   );

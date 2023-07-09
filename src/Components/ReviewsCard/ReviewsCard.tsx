@@ -1,9 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
-import { Paragraph } from '../../styles/typography';
+import { HighlightedLetter, Paragraph, StarAvg, Title2 } from '../../styles/Typography';
 import { api } from '../../services/api';
 import { UserContext } from '../../providers/UserContext';
+import { ReviewArea, StyledItem } from './StyleReview';
+import { StyledStarSec } from '../MoviesCard/MoviesCardStyle';
+import { star } from '../../assets/star';
 
-export const ReviewsCard = ({ review, index }) => {
+export const ReviewsCard = ({ review, index }: any) => {
   const [user, setUser] = useState('');
 
   const { setIsOpenAtt } = useContext(UserContext);
@@ -14,18 +17,23 @@ export const ReviewsCard = ({ review, index }) => {
         const { data } = await api.get(`/users/${review.userId}`);
         setUser(data.name);
       } catch (error) {
-        console.log(error.message);
+        console.log(error);
       }
     };
     getUserName();
   }, []);
 
   return (
-    <div key={index} setIsOpenAtt={setIsOpenAtt}>
-      <Paragraph>{user[0]}</Paragraph>
-      <Paragraph>{review.score}</Paragraph>
-      <Paragraph>{review.description}</Paragraph>
-      <Paragraph>{user}</Paragraph>
-    </div>
+    <StyledItem key={index} setIsOpenAtt={setIsOpenAtt}>
+      <HighlightedLetter>{user[0]}</HighlightedLetter>
+      <StyledStarSec>
+      {star()}
+      <StarAvg>{review.score}</StarAvg>
+      </StyledStarSec>
+      <ReviewArea>
+      <Paragraph>"{review.description}"</Paragraph>
+      </ReviewArea>
+      <Title2>{user}</Title2>
+    </StyledItem>
   );
 };

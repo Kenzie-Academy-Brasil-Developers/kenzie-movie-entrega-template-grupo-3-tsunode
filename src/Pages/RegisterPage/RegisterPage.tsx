@@ -1,3 +1,4 @@
+import { Footer } from '../../Components/Footer/Foot';
 import { Header } from '../../Components/Header/Header';
 import { Register } from '../../Components/Register/Register';
 import { ToastContainer } from 'react-toastify';
@@ -12,6 +13,7 @@ export const RegisterPage = () => {
       <a href="/registerPage">registerPage</a>
       <ToastContainer /> {/* Adiciona o ToastContainer aqui */}
       <Register />
+      <Footer />
     </>
   );
 };

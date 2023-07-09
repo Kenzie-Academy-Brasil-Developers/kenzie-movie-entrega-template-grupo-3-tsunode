@@ -1,22 +1,27 @@
-import { styled } from 'styled-components';
+import styled from "styled-components";
 
 export const StyledLoginSection = styled.section`
-  background-image: url('../../../src/assets/Rectangle 13.png');
+  background-image: url("../../../src/assets/Rectangle 13.png");
   background-size: cover;
-  height: 80vh;
-`;
+  height: 82vh;
+  margin-bottom: -2rem;
+  
+  `;
 export const StyledLoginForm = styled.form`
   background-color: var(--lightgray2);
   display: flex;
   flex-direction: column;
-  max-width: 36rem;
+  max-width: 33rem;
   padding: 1rem 1.5rem;
+  margin-left: 14vw;
   gap: 2rem;
   border-radius: 8px;
-  margin-top: 10rem;
-  margin-left: 10rem;
+  margin-top: 4rem;
+  input{
+    height: 3rem;
+  }
   @media screen and (max-width: 844px) {
-    margin: 10rem auto;
+    margin: 4rem 14vw;
   }
 `;
 export const LoginLowerSection = styled.div`
